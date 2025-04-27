@@ -1,9 +1,10 @@
 .experience {
     padding: 5% 10%;
+    scroll-margin-top: 80px
   }
   
   .experience h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: #222;
     margin-bottom: 0.5rem;
     text-align: center;
@@ -33,7 +34,7 @@
   }
   
   .tab.active {
-    background: #007bff;
+    background: #5A45C7;
     color: white;
   }
   
@@ -43,7 +44,7 @@
   
   .timeline {
     display: none;
-    border-left: 2px solid #007bff;
+    border-left: 2px solid #5A45C7;
     padding-left: 20px;
     margin-top: 1rem;
   }

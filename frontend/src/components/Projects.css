@@ -1,10 +1,11 @@
 .projects {
     padding: 5% 10%;
     text-align: center;
+    scroll-margin-top: 80px
   }
   
   .projects h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: #222;
     margin-bottom: 0.5rem;
   }
@@ -79,7 +80,7 @@
   
   .project-technologies span {
     background-color: #e0f2f7;
-    color: #007bff;
+    color: #5A45C7;
     padding: 0.3rem 0.6rem;
     border-radius: 5px;
     font-size: 0.8rem;
@@ -90,10 +91,11 @@
     gap: 1rem;
     margin-top: 0.5rem; /* Teknolojilerle arasına biraz boşluk bırakılabilir */
     align-items: flex-end; /* Bağlantıları da dikeyde en alta hizalayabiliriz */
+    padding-bottom: 0.5rem;
   }
   
   .project-links a {
-    color: #007bff;
+    color:#5A45C7;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease-in-out;

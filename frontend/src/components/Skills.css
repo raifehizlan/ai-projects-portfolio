@@ -1,0 +1,128 @@
+
+/* Skills Container Stili */
+.skills-container {
+  max-width: 1000px;
+  margin: 2rem auto; /* Dış boşluk */
+  padding: 2rem;
+  background: #ffffff; /* Tam beyaz arka plan */
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Daha belirgin gölge */
+  transition: all 0.3s ease; /* Yumuşak geçiş */
+  scroll-margin-top: 100px
+}
+
+.skills-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+}
+
+.skills-container h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2c3e50; /* Koyu başlık rengi */
+  letter-spacing: -0.02em;
+}
+
+.skill-category {
+  margin-bottom: 3rem;
+}
+
+.skill-category h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #5A45C7; /* Canlı mavi */
+  border-bottom: 3px solid #5A45C7;
+  padding-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.skill-category ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 0;
+  margin: 0;
+}
+
+.skill-category li {
+  background: #ecf0f1; /* Çok açık gri */
+  padding: 1rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 500;
+  color: #2c3e50;
+  transition: all 0.3s ease;
+  cursor: default;
+  border: 1px solid transparent;
+}
+
+.skill-category li:hover {
+  background: #ffffff;
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  border-color: #bdc3c7;
+}
+
+.skill-icon {
+  font-size: 2rem;
+  color: #8e44ad; /* Mor */
+}
+
+/* Responsive Düzen */
+@media (max-width: 768px) {
+  .skills-container {
+    padding: 1.5rem;
+    margin: 1rem auto;
+  }
+
+  .skills-container h2 {
+    font-size: 2.5rem;
+  }
+
+  .skill-category h3 {
+    font-size: 1.5rem;
+  }
+
+  .skill-category ul {
+    gap: 1rem;
+  }
+
+  .skill-category li {
+    padding: 0.75rem 1rem;
+  }
+
+  .skill-icon {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-container {
+    padding: 1rem;
+  }
+
+  .skills-container h2 {
+    font-size: 2rem;
+  }
+
+  .skill-category h3 {
+    font-size: 1rem;
+  }
+
+  .skill-category ul {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .skill-category li {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}

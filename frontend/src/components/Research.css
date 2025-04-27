@@ -1,0 +1,49 @@
+.research {
+    padding: 5% 10%;
+    text-align: center;
+    scroll-margin-top: 80px
+  }
+  
+  .research h1 {
+    font-size: 2rem;
+    color: #222;
+    margin-bottom: 0.5rem;
+  }
+  
+  .research-intro {
+    color: #777;
+    margin-bottom: 2rem;
+  }
+  
+  .research-list {
+    margin-top: 2rem;
+  }
+  
+  .research-item {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+  }
+  
+  .research-item h3 {
+    font-size: 1.5rem;
+    color: #5A45C7;
+    margin-bottom: 0.8rem;
+  }
+  
+  .research-description {
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  .research-description strong {
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .research-description p {
+    margin-bottom: 0.5rem;
+  }

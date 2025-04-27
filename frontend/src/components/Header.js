@@ -9,25 +9,39 @@ function Header() {
       <div className="header">
         <ul>
           <li>
-            <a href="#top"><FontAwesomeIcon icon={faHouseUser} /> Home</a>
+            <a href="#top">
+              <FontAwesomeIcon icon={faHouseUser} /> Home
+            </a>
           </li>
           <li>
-            <a href="#about"><FontAwesomeIcon icon={faAddressCard} /> About</a>
+            <a href="#about">
+              <FontAwesomeIcon icon={faAddressCard} /> About
+            </a>
           </li>
           <li>
-            <a href="#experience"><FontAwesomeIcon icon={faBriefcase} /> Experience</a>
+            <a href="#experience">
+              <FontAwesomeIcon icon={faBriefcase} /> Experience
+            </a>
           </li>
           <li>
-            <a href="#projects"><FontAwesomeIcon icon={faLightbulb} /> Projects</a>
+            <a href="#projects">
+              <FontAwesomeIcon icon={faLightbulb} /> Projects
+            </a>
           </li>
           <li>
-            <a href="#research"><FontAwesomeIcon icon={faBookOpen} /> Research</a>
+            <a href="#research">
+              <FontAwesomeIcon icon={faBookOpen} /> Research
+            </a>
           </li>
           <li>
-            <a href="#skills"><FontAwesomeIcon icon={faScrewdriverWrench} /> Skills</a>
+            <a href="#skills">
+              <FontAwesomeIcon icon={faScrewdriverWrench} /> Skills
+            </a>
           </li>
           <li>
-            <a href="#contact"><FontAwesomeIcon icon={faGlobe} /> Contact</a>
+            <a href="#contact">
+              <FontAwesomeIcon icon={faGlobe} /> Contact
+            </a>
           </li>
         </ul>
       </div>
