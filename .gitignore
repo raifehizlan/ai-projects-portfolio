@@ -1,0 +1,51 @@
+# Frontend için
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+
+
+
+
+
+
+
+
+
+########################Later it will be organized#################################
+
+
+
+
+
+
+
+
+
+
+
+# Backend için (Python örneği)
+backend/__pycache__/
+backend/*.pyc
+backend/.env
+backend/venv/
+backend/*.log
+
+# ML Modeli için (eğer büyük veri dosyaları varsa)
+data/ # Büyük veri dosyalarını takip etmek istemiyorsan
+trained_model/* # Eğitilmiş model dosyalarını takip etmek istemiyorsan (büyük olabilirler)
+
+# IDE'ye özel dosyalar
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+
+# İşletim sistemine özel dosyalar
+.DS_Store
+Thumbs.db
+
+# Diğer geçici dosyalar veya loglar
+*.log
+temp/
+tmp/
