@@ -1,0 +1,73 @@
+#home {
+  display: flex;
+  padding: 5% 10%; /* Dikey boşluğu azalttım */
+  align-items: center; /* Dikeyde ortalama */
+  justify-content: space-around; /* Öğeler arasında boşluk */
+  min-height: 80vh; /* Ekran yüksekliğinin en az %80'i kadar olsun */
+}
+
+.homeText {
+  width: 50%; /* Ekranın yarısını kaplasın */
+  font-size: 1.2rem;
+}
+
+.homeText h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+.homeText h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+.homeText p {
+  color: #777;
+  line-height: 1.6;
+}
+
+.homeText * {
+  padding-bottom: 0.8rem;
+}
+
+.homeImage {
+  width: 40%; /* Ekranın %40'ını kaplasın */
+  margin-left: 2%; /* Biraz boşluk */
+  text-align: center; /* Fotoğrafı ortala */
+}
+
+.homeImage img {
+  width: 70%; /* Kendi konteynerinin %70'i kadar */
+  max-width: 300px; /* Maksimum genişlik */
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.socialMedia {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-size: 1.8rem;
+  padding-top: 20px;
+}
+
+.socialMedia a {
+  color: #333;
+  transition: color 0.3s ease-in-out;
+}
+
+.socialMedia a:visited {
+  color: #333;
+}
+
+.socialMedia a:hover {
+  color: #007bff;
+}
+
+.socialMedia a svg {
+  font-size: 1.8rem;
+}

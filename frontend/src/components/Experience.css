@@ -1,0 +1,72 @@
+.experience {
+    padding: 5% 10%;
+  }
+  
+  .experience h1 {
+    font-size: 2.5rem;
+    color: #222;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+  
+  .experience p {
+    color: #777;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  
+  .tab {
+    background: #ddd;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  }
+  
+  .tab.active {
+    background: #007bff;
+    color: white;
+  }
+  
+  .tab:hover {
+    background: #ccc;
+  }
+  
+  .timeline {
+    display: none;
+    border-left: 2px solid #007bff;
+    padding-left: 20px;
+    margin-top: 1rem;
+  }
+  
+  .timeline.active {
+    display: block;
+  }
+  
+  .event {
+    background: white;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  
+  .event h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 0.3rem;
+  }
+  
+  .event p {
+    color: #555;
+    font-size: 0.9rem;
+  }

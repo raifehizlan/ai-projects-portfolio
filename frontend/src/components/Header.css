@@ -1,0 +1,44 @@
+header {
+    height: 10%;
+    background-color: #e9e9f7;
+    position: sticky;
+    top: 0; /* Sabit üst çubuk için */
+    z-index: 100; /* Diğer içeriklerin üzerinde kalması için */
+  }
+  
+  .header {
+    padding: 1rem 2rem; /* Daha iyi iç boşluk */
+  }
+  
+  .header ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Daha iyi boşluk */
+    justify-content: center;
+    align-items: center; /* Dikeyde ortalama */
+    list-style: none; /* Noktaları kaldır */
+    padding: 0;
+    margin: 0;
+  }
+  
+  .header ul li a {
+    padding: 0.7rem 1.2rem; /* Daha iyi dokunma alanı */
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+  }
+  
+  .header ul li a:visited {
+    color: #333;
+  }
+  
+  .header ul li a:hover {
+    color: #007bff; /* Vurgu rengi */
+  }
+  
+  .header ul li a svg {
+    margin-right: 0.5rem; /* İkon ve yazı arasında boşluk */
+  }
