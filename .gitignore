@@ -15,7 +15,10 @@ frontend/dist/
 
 
 
-
+# ML Modeli için (eğer büyük veri dosyaları varsa)
+ml_models/model_deid/app/.env
+ml_models/model_deid/app/model_downloaded
+ml_models/model_deid/app/deneme.ipynb
 
 
 
@@ -30,9 +33,8 @@ backend/.env
 backend/venv/
 backend/*.log
 
-# ML Modeli için (eğer büyük veri dosyaları varsa)
-data/ # Büyük veri dosyalarını takip etmek istemiyorsan
-trained_model/* # Eğitilmiş model dosyalarını takip etmek istemiyorsan (büyük olabilirler)
+
+
 
 # IDE'ye özel dosyalar
 .idea/

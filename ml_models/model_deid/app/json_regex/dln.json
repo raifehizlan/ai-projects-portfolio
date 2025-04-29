@@ -1,0 +1,1 @@
+{"label": "DLN", "regex": "\\S+\\d+\\S+", "prefix": ["Treiber", "F\u00fchrerschein"], "suffix": [], "contextLength": 20}

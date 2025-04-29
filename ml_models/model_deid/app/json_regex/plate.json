@@ -1,0 +1,1 @@
+{"label": "PLATE", "regex": "\\S+\\d+\\S+", "prefix": ["Platte"], "suffix": [], "contextLength": 15}

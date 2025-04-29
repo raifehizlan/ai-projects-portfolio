@@ -16,9 +16,15 @@ body {
   
   .container {
     background-color: #fbfbfe; /* HTML'deki gibi */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
   
   /* Scroll davranışını yumuşatma (isteğe bağlı) */
   html {
     scroll-behavior: smooth;
+  }
+  footer {
+    margin-top: auto;
   }

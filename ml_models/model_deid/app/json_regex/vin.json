@@ -1,0 +1,1 @@
+{"label": "VIN", "regex": "\\S+\\d\\S+", "prefix": ["FIN", "FAHRZEUG"], "suffix": [], "contextLength": 20}

@@ -1,0 +1,1 @@
+{"label": "ACCOUNT", "regex": "((CH)?[0-9]{7}[A-Z0-9]{12})|((AT)?[0-9]{18})|((DE)?[0-9]{20})", "prefix": ["IBAN", "bankkonto", "konto"], "suffix": [], "contextLength": 20}

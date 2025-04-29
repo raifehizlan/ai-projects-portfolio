@@ -3,6 +3,8 @@ import './Header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouseUser, faAddressCard, faBriefcase, faLightbulb, faBookOpen, faScrewdriverWrench, faGlobe } from '@fortawesome/free-solid-svg-icons';
 
+
+
 function Header() {
   return (
     <header>

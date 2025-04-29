@@ -1,0 +1,1 @@
+{"label": "FAX", "regex": "\\S+\\d\\S+", "prefix": ["Fax"], "suffix": [], "contextLength": 25}

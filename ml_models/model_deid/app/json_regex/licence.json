@@ -1,0 +1,1 @@
+{"label": "LICENCE", "regex": "\\S+\\d\\S+", "prefix": ["Lizenz", "Zertifikat"], "suffix": [], "contextLength": 15}
