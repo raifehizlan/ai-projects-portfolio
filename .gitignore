@@ -18,7 +18,8 @@ frontend/dist/
 # ML Modeli için (eğer büyük veri dosyaları varsa)
 ml_models/model_deid/app/.env
 ml_models/model_deid/app/model_downloaded
-ml_models/model_deid/app/deneme.ipynb
+ml_models/model_deid/app/predict.ipynb
+ml_models/model_deid/app/FASTAPI.log
 
 
 

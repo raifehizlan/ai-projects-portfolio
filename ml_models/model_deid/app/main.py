@@ -9,7 +9,6 @@ from aimped.nlp.pipeline import Pipeline
 from decouple import config
 import warnings
 import json, os, requests, logging, sys
-from aimped.utils import get_handler as get_logger
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 
 # Azure Model Loader import
@@ -18,9 +17,8 @@ from model_loader import AzureModelLoader
 # ----- Uyarıları kapat -----
 warnings.filterwarnings('ignore')
 
-# ----- Logger ayarları -----
-logger = get_logger(log_file='FASTAPI.log', log_level=logging.INFO)
-logger.info("Model dependencies imported and logger configured")
+
+print("Model dependencies imported")
 
 
 # ----- FastAPI uygulaması başlat -----
@@ -33,8 +31,8 @@ app = FastAPI(
 # ----- API Request/Response Modelleri -----
 
 class PredictionRequest(BaseModel):
-    text: List[str] = Field(..., example=["Patient John Doe visited Berlin."], description="List of texts to process.")
-    entity: List[str] = Field(default=[], example=["PERSON", "LOCATION"], description="Entities to focus on. If empty, all entities are processed.")
+    text: List[str] = Field(..., example=["Der 45-jährige Patient Herr Müller wurde am 12.03.2023 wegen Brustschmerzen in die Kardiologie der Charité Berlin eingewiesen."], description="List of texts to process.")
+    entity: List[str] = Field(default=[], example=["CITY", "PATIENT", "DATE"], description="Entities to focus on. If empty, all entities are processed.")
     masked: bool = Field(default=False, description="Whether to mask the entities (e.g., [CITY]).")
     faked: bool = Field(default=False, description="Whether to replace entities with synthetic (fake) data.")
 
@@ -55,7 +53,7 @@ class KFServeHealthDeidNerModel:
         self.name = config("MODEL_NAME")
         self.container_name = config("AZURE_STORAGE_CONTAINER")
         self.prefix = config("PREFIX")  # aynı şeyi kullanıyoruz
-        self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        self.device = "cpu"
         self.local_dir = config("LOCAL_FOLDER")
         self.ready = False
         self.data_type = "data_json"
@@ -77,7 +75,7 @@ class KFServeHealthDeidNerModel:
 
         self.load()
 
-        logger.info(f"Model {self.name} initialized")
+        print(f"Model {self.name} initialized")
 
     def load(self):
         """
@@ -89,14 +87,14 @@ class KFServeHealthDeidNerModel:
             self.tokenizer = AutoTokenizer.from_pretrained(self.local_dir)
             self.pipe = Pipeline(model=self.model, tokenizer=self.tokenizer, device=self.device)
             self.ready = True
-            logger.info(f"Model loaded successfully: {self.name}")
+            print(f"Model loaded successfully: {self.name}")
 
             # Backend'e aktiflik bildirimi
             # if self.backend_url:
             #     self.notify_backend()
 
         except Exception as e:
-            logger.error(f"Error loading model: {e}")
+            print(f"Error loading model: {e}")
             raise HTTPException(status_code=500, detail=f"Model loading error: {str(e)}")
 
     # def notify_backend(self):
@@ -107,16 +105,16 @@ class KFServeHealthDeidNerModel:
     #         res = json.dumps({"is_active": True, "model_name": self.name})
     #         headers = {'Content-Type': 'application/json; charset=UTF-8'}
     #         response = requests.post(self.backend_url, headers=headers, data=res)
-    #         logger.info(f"Backend notified successfully: {response.status_code}")
+    #         print(f"Backend notified successfully: {response.status_code}")
     #     except Exception as err:
-    #         logger.error(f"Error notifying backend: {err}")
+    #         print.error(f"Error notifying backend: {err}")
 
     # def update_backend_url(self, new_url: str):
     #     """
     #     Backend URL'sini günceller ve tekrar bildirim gönderir.
     #     """
     #     self.backend_url = new_url
-    #     logger.info(f"Backend URL updated to: {self.backend_url}")
+    #     print(f"Backend URL updated to: {self.backend_url}")
     #     if self.ready:
     #         self.notify_backend()
 
@@ -128,13 +126,16 @@ class KFServeHealthDeidNerModel:
         sents_tokens_list = word_tokenizer(sentences)
         tokens, preds, probs, begins, ends = self.pipe.ner_result(text=text, sents_tokens_list=sents_tokens_list, sentences=sentences)
         results = self.pipe.chunker_result(text, white_label_list, tokens, preds, probs, begins, ends)
-
-        regex_json_files_path = "json_regex"
+        regex_json_files_path = os.path.abspath(__file__).replace("main.py", "json_regex")
         results = self.pipe.regex_model_output_merger(regex_json_files_path, results, text, white_label_list)
 
-        fake_csv_path = "fake.csv"
+        fake_csv_path = os.path.abspath(__file__).replace("main.py", "fake.csv")
         results = self.pipe.deid_result(text, results, fake_csv_path, faked=faked, masked=masked)
         return results
+        
+
+
+
 
     def predict(self, request: PredictionRequest):
         """
@@ -144,12 +145,11 @@ class KFServeHealthDeidNerModel:
             raise HTTPException(status_code=503, detail="Model not loaded yet")
 
         if not request.text:
-            logger.error("No input text provided")
+            print.error("No input text provided")
             raise HTTPException(status_code=400, detail="No input text provided")
-
+        print(request.text)
         outputs = [self.get_prediction(text, request.entity, request.faked, request.masked) for text in request.text]
-        logger.info("Prediction completed successfully")
-
+        print("Prediction completed successfully")
         return {"status": True, "data_type": self.data_type, "output": outputs}
 
 # ----- Model Instance -----
@@ -168,10 +168,7 @@ async def predict(request: PredictionRequest):
     except HTTPException as e:
         raise e
     except Exception as e:
-        logger.error(f"Prediction error: {e}")
+        print(f"Prediction error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.post("/update-backend-url")
-async def update_backend_url(url: str = Body(..., embed=True)):
-    model_instance.update_backend_url(url)
-    return {"message": "Backend URL updated successfully", "new_url": url}
+

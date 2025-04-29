@@ -31,6 +31,10 @@
         pip install -r requirements.txt && \
         rm -rf ~/.cache/pip
     RUN pip install python-decouple
+
+
+    RUN pip install nltk
+    RUN python -m nltk.downloader punkt
     # ----------------------
     # 3. Uygulamayı kopyala
     # ----------------------
