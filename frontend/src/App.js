@@ -18,6 +18,8 @@ import Skills from "./components/Skills";
 import Contact from "./components/Contact";
 import Deid from "./pages/Deid";
 import "./App.css";
+import ScrollToTop from "./components/ScrollToTop";
+
 
 // Header'ı route'a göre kontrol etmek için küçük bir Wrapper yazıyoruz
 function Layout() {
@@ -27,7 +29,7 @@ function Layout() {
     <>
       {/* Sadece proje detay sayfasında Header'ı gizliyoruz */}
       <Header />
-
+      <ScrollToTop />
       <Routes>
         <Route
           path="/"
