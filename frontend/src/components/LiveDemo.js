@@ -14,10 +14,12 @@ const LiveDemo = ({
 }) => {
   return (
     <section>
-      <h2>⚡ Live Demo</h2>
+      <h2>⚡ Try It Yourself</h2>
       <div className="demo">
         <div className="input-container">
-          <label htmlFor="textInput" className="input-label">Enter Text</label>
+          <label htmlFor="textInput" className="input-label">
+            Enter Text
+          </label>
           <div className="textarea">
             <textarea
               id="textInput"
@@ -35,10 +37,15 @@ const LiveDemo = ({
             {parsedResult ? (
               <MaskedText parsedData={parsedResult} />
             ) : (
-              <span style={{ color: '#999' }}>No prediction yet.</span>
+              <span style={{ color: "#999" }}>No prediction yet.</span>
             )}
           </div>
-          <JsonViewer data={result} show={showJson} toggle={toggleJson} copyData={result} />
+          <JsonViewer
+            data={result}
+            show={showJson}
+            toggle={toggleJson}
+            copyData={result}
+          />
         </div>
       </div>
     </section>

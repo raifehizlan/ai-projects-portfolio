@@ -9,9 +9,11 @@ const ENTITIES = [
 
 const EntityList = () => (
   <section className="entities">
-    <h2>📋 Predicted Entities</h2>
+    <h2>📋 Supported PHI Entity Types</h2>
     <ul className="entity-list">
-      {ENTITIES.map(entity => <li key={entity}>{entity}</li>)}
+      {ENTITIES.map((entity) => (
+        <li key={entity}>{entity}</li>
+      ))}
     </ul>
   </section>
 );
