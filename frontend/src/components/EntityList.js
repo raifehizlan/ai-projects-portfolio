@@ -1,11 +1,7 @@
 import React from "react";
 import "./EntityList.css"
+import ENTITIES from "../data/deidEntities";
 
-const ENTITIES = [
-  "AGE", "CITY", "COUNTRY", "DATE", "DOCTOR", "EMAIL", "HOSPITAL", "IDNUM",
-  "ORGANIZATION", "PATIENT", "PHONE", "PROFESSION", "SSN", "STREET", "ZIP",
-  "ACCOUNT", "DLN", "IP", "FAX", "LICENCE", "PLATE", "URL", "VIN"
-];
 
 const EntityList = () => (
   <section className="entities">

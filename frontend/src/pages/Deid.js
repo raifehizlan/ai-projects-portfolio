@@ -12,7 +12,7 @@ import "./Deid.css";
 
 import ExampleDemo from "../components/ExampleDemo";
 import LiveDemo from "../components/LiveDemo";
-
+import deidModelDetails from "../data/deidModelDetails";
 const Deid = () => {
   const [inputText, setInputText] = useState("");
   const [result, setResult] = useState(null);
@@ -59,7 +59,12 @@ const Deid = () => {
     <div className="deid-container">
       <BackButton />
       <h1>Protecting Sensitive Medical Data with Privacy-First AI</h1>
-      <ModelDetails />
+      <ModelDetails
+        title={deidModelDetails[0].title}
+        description={deidModelDetails[0].description}
+        methods={deidModelDetails[0].methods}
+        users={deidModelDetails[0].users}
+      />
       <EntityList />
       <MetricsTable />
 

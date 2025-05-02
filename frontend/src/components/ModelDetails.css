@@ -1,9 +1,10 @@
-  
-  h1, h2 {
+h1, h2 {
     font-size: 1.4rem;
     color: var(--primary-color);
-    margin-bottom: 1rem;
+    margin: 1dvh;
+    margin-bottom: 2rem;
     text-align: center;
+
     
   }
   
@@ -17,4 +18,9 @@
   
   .intro p{
     text-align: justify;
+  }
+
+  .intro h1{
+    padding-top: 0rem;
+    margin-top:0rem
   }
