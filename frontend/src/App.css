@@ -20,3 +20,9 @@ body {
   footer {
     margin-top: auto;
   }
+  .proje-bulunamadi{
+    text-align: center;
+    padding-top: 250px;
+    font-size: 40px;
+    font-weight: 500;
+  }

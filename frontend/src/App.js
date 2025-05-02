@@ -27,14 +27,15 @@ function ProjectDetail() {
   const { id } = useParams();
 
   switch (id) {
-    case "deid":
+    case "1": // id'yi string olarak karşılaştırın çünkü URL parametreleri genellikle stringdir
       return <Deid />;
-    case "ner":
+    case "2": // id'yi string olarak karşılaştırın
       return <Ner />;
     default:
-      return <div>Proje bulunamadı.</div>;
+      return <div className="proje-bulunamadi">Proje bulunamadı.</div>;
   }
 }
+
 
 // Header'ı route'a göre kontrol etmek için küçük bir Wrapper yazıyoruz
 function Layout() {

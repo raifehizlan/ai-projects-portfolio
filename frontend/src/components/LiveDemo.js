@@ -1,7 +1,8 @@
 import React from "react";
 import MaskedText from "./MaskedText";
 import JsonViewer from "./JsonViewer";
-import "./LiveDemo.css"
+import "./LiveDemo.css";
+import { exportToJson, exportToCsv } from "../utils/exportUtils";
 
 const LiveDemo = ({
   inputText,
@@ -10,7 +11,7 @@ const LiveDemo = ({
   parsedResult,
   result,
   showJson,
-  toggleJson
+  toggleJson,
 }) => {
   return (
     <section>
@@ -40,6 +41,22 @@ const LiveDemo = ({
               <span style={{ color: "#999" }}>No prediction yet.</span>
             )}
           </div>
+
+          {parsedResult && (
+            <div className="export-buttons">
+              <button
+                onClick={() =>
+                  exportToJson(
+                    { input: inputText, output: result },
+                    "prediction.json"
+                  )
+                }
+              >
+                📥 Export JSON
+              </button>
+            </div>
+          )}
+
           <JsonViewer
             data={result}
             show={showJson}
