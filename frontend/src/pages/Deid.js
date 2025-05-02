@@ -1,98 +1,89 @@
-import { useNavigate } from "react-router-dom";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import BackButton from "../components/BackButton";
+import ModelDetails from "../components/ModelDetails";
+import EntityList from "../components/EntityList";
+import MetricsTable from "../components/MetricsTable";
+import JsonViewer from "../components/JsonViewer";
+import MaskedText from "../components/MaskedText";
+import { parseMaskedText } from "../utils/renderMaskedText";
+import deidExampleData from "../data/deidExampleData";
 import "./Deid.css";
 
-function Deid() {
-    const [inputText, setInputText] = useState('');
-    const [prediction, setPrediction] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
-    const navigate = useNavigate(); 
-    const handlePredict = async () => {
-      if (!inputText.trim()) return;
-      setLoading(true);
-      setError('');
-      setPrediction('');
-  
-      try {
-        const response = await fetch('http://localhost:8000/predict', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ text: inputText }),
-        });
-  
-        const data = await response.json();
-        setPrediction(data.predicted_text);
-      } catch (err) {
-        setError('Prediction failed. Please try again.');
-      } finally {
-        setLoading(false);
-      }
-    };
+import ExampleDemo from "../components/ExampleDemo";
+import LiveDemo from "../components/LiveDemo";
 
+const Deid = () => {
+  const [inputText, setInputText] = useState("");
+  const [result, setResult] = useState(null);
+  const [showJson, setShowJson] = useState(false);
+  const [parsedResult, setParsedResult] = useState(null);
 
+  const [selectedDemo, setSelectedDemo] = useState(0);
+  const [inputDemoText, setInputDemoText] = useState("");
+  const [parsedDemoResult, setParsedDemoResult] = useState([]);
+  const [parsedDemoEntities, setParsedDemoEntities] = useState([]);
+  const [activeDemo, setActiveDemo] = useState(0);
 
-  const handleGoBack = () => {
-    navigate("/#projects");
+  const handleDemoSelection = (demo) => {
+    setSelectedDemo(demo);
+    const demoText = deidExampleData[demo].text;
+    const demoEntities = deidExampleData[demo].entities;
+    setInputDemoText(demoText);
+    setParsedDemoResult(parseMaskedText(demoText, demoEntities));
+    setParsedDemoEntities(demoEntities);
+    setActiveDemo(demo);
+  };
+
+  useEffect(() => {
+    handleDemoSelection(0);
+  }, []);
+
+  const handleSubmit = async () => {
+    try {
+      const res = await axios.post("http://localhost:8000/predict", {
+        text: [inputText],
+        masked: true,
+        faked: true,
+      });
+      const predictionOutput = res.data.output[0];
+      setResult(predictionOutput);
+      setParsedResult(parseMaskedText(inputText, predictionOutput.entities));
+    } catch (error) {
+      console.error(error);
+      alert("Backend'e erişilemedi.");
+    }
   };
 
   return (
-    <div className="deid-page">
-      <button className="floating-back-button" onClick={handleGoBack}>
-        ← Back
-      </button>
+    <div className="deid-container">
+      <BackButton />
+      <h1>Protecting Sensitive Medical Data with Privacy-First AI</h1>
+      <ModelDetails />
+      <EntityList />
+      <MetricsTable />
 
- {/* Model Açıklamaları Bölümü */}
- <section className="model-info">
-        <h2>Anonyx</h2>
-        <p>This model was trained to detect and mask sensitive information from clinical and personal texts.</p>
-        <ul>
-          <li>🧠 <strong>Technologies:</strong> Python, FastAPI, Hugging Face Transformers, PyTorch, Docker</li>
-          <li>📊 <strong>Metrics:</strong> Precision: 0.94, Recall: 0.92, F1-Score: 0.93</li>
-          <li>🏷️ <strong>Detected Labels:</strong> NAME, DATE, LOCATION, ORGANIZATION, EMAIL, PHONE</li>
-        </ul>
-      </section>
+      <ExampleDemo
+        activeDemo={activeDemo}
+        inputText={inputDemoText}
+        parsedResult={parsedDemoResult}
+        entities={parsedDemoEntities}
+        showJson={showJson}
+        toggleJson={() => setShowJson(!showJson)}
+        onDemoChange={handleDemoSelection}
+      />
 
-      
-{/* Örnek Predict Bölümü */}
-<section className="live-demo">
-        <h2>Live Demo</h2>
-        <textarea
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
-          placeholder="Enter text to de-identify..."
-          rows="5"
-        ></textarea>
-        <button onClick={handlePredict} disabled={loading}>
-          {loading ? 'Predicting...' : 'Predict'}
-        </button>
-
-        {error && <p className="error-message">{error}</p>}
-
-        {prediction && (
-          <div className="prediction-result">
-            <h3>De-identified Text:</h3>
-            <p>{prediction}</p>
-          </div>
-        )}
-      </section>
-
-      {/* Önceden Verilmiş 2 Predict Örneği */}
-      <section className="example-predictions">
-        <h2>Example Predictions</h2>
-        <div className="example">
-          <p><strong>Input:</strong> "John Doe visited New York on 12/12/2020."</p>
-          <p><strong>Output:</strong> "[NAME] visited [LOCATION] on [DATE]."</p>
-        </div>
-        <div className="example">
-          <p><strong>Input:</strong> "Contact me at john.doe@example.com or (123) 456-7890."</p>
-          <p><strong>Output:</strong> "Contact me at [EMAIL] or [PHONE]."</p>
-        </div>
-      </section>
+      <LiveDemo
+        inputText={inputText}
+        onInputChange={(e) => setInputText(e.target.value)}
+        onSubmit={handleSubmit}
+        parsedResult={parsedResult}
+        result={result}
+        showJson={showJson}
+        toggleJson={() => setShowJson(!showJson)}
+      />
     </div>
   );
-}
+};
 
 export default Deid;

@@ -1,0 +1,22 @@
+.floating-back-button {
+    position: fixed;
+    top: 0px;
+    right: 50px;
+    width: 100px;
+    background-color: #ffffff;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 8px 14px;
+    font-size: 0.95rem;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    z-index: 999; /* Her zaman üstte olsun */
+  }
+  
+  .floating-back-button:hover {
+    background-color: #f7f7f7;
+    border-color: #999;
+    transform: translateY(-2px);
+  }

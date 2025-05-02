@@ -1,0 +1,38 @@
+import React from "react";
+import "./MetricsTable.css"
+
+const METRICS = [
+  ["AGE", 0.9906, 0.9801, 0.9853, 754],
+  ["CITY", 0.9799, 0.9457, 0.9625, 258],
+  ["COUNTRY", 0.9127, 1.0000, 0.9544, 115],
+  ["DATE", 0.9961, 0.9978, 0.9969, 4909],
+  ["DOCTOR", 0.9320, 0.9555, 0.9436, 1751],
+  ["HOSPITAL", 0.9737, 0.9884, 0.9810, 862],
+  ["IDNUM", 0.9805, 0.9934, 0.9869, 606],
+  ["PATIENT", 0.8994, 0.9067, 0.9030, 868],
+  ["PHONE", 0.9905, 1.0000, 0.9952, 208],
+  ["macro avg", 0.9496, 0.9711, 0.9595, 10864],
+  ["weighted avg", 0.9710, 0.9787, 0.9747, 10864]
+];
+
+const MetricsTable = () => (
+  <section className="metrics">
+    <h2>📈 Classification Results</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th><th>Precision</th><th>Recall</th><th>F1-score</th><th>Support</th>
+        </tr>
+      </thead>
+      <tbody>
+        {METRICS.map(([name, p, r, f1, sup]) => (
+          <tr key={name}>
+            <td>{name}</td><td>{p}</td><td>{r}</td><td>{f1}</td><td>{sup}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </section>
+);
+
+export default MetricsTable;

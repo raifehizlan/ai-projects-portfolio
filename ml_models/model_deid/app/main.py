@@ -9,6 +9,10 @@ from aimped.nlp.pipeline import Pipeline
 from decouple import config
 import warnings
 import json, os, requests, logging, sys
+from fastapi.middleware.cors import CORSMiddleware
+
+
+
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 
 # Azure Model Loader import
@@ -28,6 +32,13 @@ app = FastAPI(
     description="A FastAPI application for de-identification (DEID) with Named Entity Recognition (NER)."
 )
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Gerekirse sadece 'http://localhost:3000'
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # ----- API Request/Response Modelleri -----
 
 class PredictionRequest(BaseModel):
@@ -54,7 +65,7 @@ class KFServeHealthDeidNerModel:
         self.container_name = config("AZURE_STORAGE_CONTAINER")
         self.prefix = config("PREFIX")  # aynı şeyi kullanıyoruz
         self.device = "cpu"
-        self.local_dir = config("LOCAL_FOLDER")
+        self.local_dir = os.path.abspath(__file__).replace("main.py", config("LOCAL_FOLDER"))
         self.ready = False
         self.data_type = "data_json"
 
@@ -125,6 +136,9 @@ class KFServeHealthDeidNerModel:
         sentences = sentence_tokenizer(text, "german")
         sents_tokens_list = word_tokenizer(sentences)
         tokens, preds, probs, begins, ends = self.pipe.ner_result(text=text, sents_tokens_list=sents_tokens_list, sentences=sentences)
+        if not white_label_list:
+            white_label_list = ["AGE", "CITY", "COUNTRY", "DATE", "DOCTOR","EMAIL", "HOSPITAL", "IDNUM", "ORGANIZATION", "PATIENT","PHONE",
+            "PROFESSION", "SSN", "STREET", "ZIP", "ACCOUNT", "DLN", "IP","FAX", "LICENCE", "PLATE", "URL", "VIN"]
         results = self.pipe.chunker_result(text, white_label_list, tokens, preds, probs, begins, ends)
         regex_json_files_path = os.path.abspath(__file__).replace("main.py", "json_regex")
         results = self.pipe.regex_model_output_merger(regex_json_files_path, results, text, white_label_list)
@@ -170,5 +184,7 @@ async def predict(request: PredictionRequest):
     except Exception as e:
         print(f"Prediction error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
 
 

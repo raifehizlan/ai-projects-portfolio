@@ -1,16 +1,8 @@
 /* Genel stiller */
 body {
     margin: 0;
-    font-family: 'Poppins', sans-serif; /* HTML'deki gibi */
-    background-color: #fbfbfe; /* HTML'deki gibi */
-    color: #222; /* Genel metin rengi */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background-color: #f0f0f0; /* Açık gri */
-    background-image: url('assets/noise.jpg'); /* Gürültü deseni */
-    background-size: auto; /* Gürültü deseninin boyutunu ayarlayın */
-    opacity: 0.9; /* Gürültü opaklığını ayarlayın */
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05); /* Çok hafif iç gölge */
+    padding: 0;
+    box-sizing: border-box;
     
   }
   

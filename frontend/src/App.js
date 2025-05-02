@@ -17,18 +17,16 @@ import Research from "./components/Research";
 import Skills from "./components/Skills";
 import Contact from "./components/Contact";
 import Deid from "./pages/Deid";
-
 import "./App.css";
 
 // Header'ı route'a göre kontrol etmek için küçük bir Wrapper yazıyoruz
 function Layout() {
   const location = useLocation();
-  const isProjectDetailPage = location.pathname.startsWith("/project/");
 
   return (
     <>
       {/* Sadece proje detay sayfasında Header'ı gizliyoruz */}
-      {!isProjectDetailPage && <Header />}
+      <Header />
 
       <Routes>
         <Route
@@ -45,7 +43,14 @@ function Layout() {
             </>
           }
         />
-        <Route path="/project/:id" element={<Deid />} />
+        <Route
+          path="/project/:id"
+          element={
+            <>
+              <Deid />
+            </>
+          }
+        />
       </Routes>
 
       {/* Footer her zaman görünsün */}

@@ -1,44 +1,111 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
 header {
-    height: 10%;
-    background-color: #e9e9f7;
-    position: sticky;
-    top: 0; /* Sabit üst çubuk için */
-    z-index: 100; /* Diğer içeriklerin üzerinde kalması için */
+  position: fixed;
+  top: 0; /* Üst kenara sabitlemek için */
+  left: 0; /* Sol kenara sabitlemek için (genellikle gereklidir) */
+  width: 100%; /* Genellikle tam genişlik istenir */ 
+  height: auto;
+  background-color: #e9e9f7;
+  z-index: 100;
+}
+
+/* Menü kapsayıcı */
+.header {
+  display: block;
+  padding: 1rem 2rem;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Menü listesi */
+.header ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.header ul li a {
+  cursor: pointer;
+  padding: 0.7rem 1.2rem;
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+}
+
+.header ul li a:visited {
+  color: #333;
+}
+
+.header ul li a:hover {
+  color: #007bff;
+}
+
+.header ul li a svg {
+  margin-right: 0.5rem;
+}
+
+/* === Hamburger Menü Stili === */
+.menu-toggle {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: absolute;
+  right: 1.5rem;
+  top: 1.2rem;
+  color: #333;
+  z-index: 200;
+
+}
+
+/* Mobil görünüm */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
   }
-  
-  .header {
-    padding: 1rem 2rem; /* Daha iyi iç boşluk */
+  .header{
+    height: 30px;
+    display: block;
   }
-  
+
   .header ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; /* Daha iyi boşluk */
-    justify-content: center;
-    align-items: center; /* Dikeyde ortalama */
-    list-style: none; /* Noktaları kaldır */
-    padding: 0;
-    margin: 0;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 2rem;
+    background-color: #e9e9f7;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: max-content;
+    
   }
-  
+
+  .header ul.open {
+    display: flex;
+  }
+
+  .header ul li {
+    margin: 0.5rem 0;
+  }
+
   .header ul li a {
-    padding: 0.7rem 1.2rem; /* Daha iyi dokunma alanı */
-    font-size: 1.1rem;
-    text-decoration: none;
-    color: #333;
-    transition: color 0.3s ease-in-out;
-    display: flex;
-    align-items: center;
+    padding: 0.5rem 1rem;
   }
-  
-  .header ul li a:visited {
-    color: #333;
-  }
-  
-  .header ul li a:hover {
-    color: #007bff; /* Vurgu rengi */
-  }
-  
-  .header ul li a svg {
-    margin-right: 0.5rem; /* İkon ve yazı arasında boşluk */
-  }
+}

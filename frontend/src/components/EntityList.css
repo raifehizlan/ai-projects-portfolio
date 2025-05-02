@@ -1,0 +1,32 @@
+.entities ul,
+  .metrics table,
+  .examples p{
+    text-align: justify;    
+  }
+  .demo textarea {
+    margin-bottom: 1rem;
+  }
+  
+  .entity-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .entity-list li {
+    list-style: none;
+    background-color: var(--entity-bg);
+    color: var(--entity-color);
+    border: 1px solid var(--border-color);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.3s ease;
+  }
+  
+  .entity-list li:hover {
+    background-color: #dbeeff;
+  }

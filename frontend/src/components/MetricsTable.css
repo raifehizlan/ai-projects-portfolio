@@ -1,0 +1,19 @@
+ 
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    background: white;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  th {
+    background-color: #f1f3f6;
+    color: var(--text-color);
+  }
+  
