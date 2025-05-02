@@ -53,7 +53,7 @@ const ExampleDemo = ({
 
         {/* Sağ Panel */}
         <div className="result-container">
-          <label className="result-label">Anonymized Output</label>
+          <label className="result-label">Predict Result</label>
           <div className="masked-output">
             <MaskedText parsedData={parsedResult} />
           </div>

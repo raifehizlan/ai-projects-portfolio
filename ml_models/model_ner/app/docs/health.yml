@@ -1,0 +1,18 @@
+tags:
+  - Health Check
+summary: Service health check
+description: Returns the model status and verifies if the service is ready to handle requests.
+produces:
+  - application/json
+responses:
+  200:
+    description: Service is up and running
+    schema:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "medical-ner-model"
+        status:
+          type: string
+          example: "Ready"

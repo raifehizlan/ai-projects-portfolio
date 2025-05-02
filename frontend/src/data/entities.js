@@ -1,6 +1,3 @@
-import React from "react";
-import "./EntityList.css";
-
 const ENTITY_MODELS = {
   deid: [
     "AGE",
@@ -27,6 +24,7 @@ const ENTITY_MODELS = {
     "URL",
     "VIN",
   ],
+
   ner: [
     "Drug",
     "ADE",
@@ -40,19 +38,4 @@ const ENTITY_MODELS = {
   ],
 };
 
-const EntityList = ({ model }) => {
-  // Props'u destructuring ile alın
-  const entities = ENTITY_MODELS[model] || [];
-  return (
-    <section className="entities">
-      <h2>📋 Supported Entity Types</h2>
-      <ul className="entity-list">
-        {entities.map((entity) => (
-          <li key={entity}>{entity}</li>
-        ))}
-      </ul>
-    </section>
-  );
-};
-
-export default EntityList;
+export default ENTITY_MODELS;

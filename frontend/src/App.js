@@ -4,6 +4,7 @@ import {
   Routes,
   Route,
   useLocation,
+  useParams,
 } from "react-router-dom";
 
 import Header from "./components/Header";
@@ -19,7 +20,21 @@ import Contact from "./components/Contact";
 import Deid from "./pages/Deid";
 import "./App.css";
 import ScrollToTop from "./components/ScrollToTop";
+import Ner from "./pages/Ner";
 
+// Proje ID'ye göre uygun bileşeni döndüren yardımcı fonksiyon
+function ProjectDetail() {
+  const { id } = useParams();
+
+  switch (id) {
+    case "deid":
+      return <Deid />;
+    case "ner":
+      return <Ner />;
+    default:
+      return <div>Proje bulunamadı.</div>;
+  }
+}
 
 // Header'ı route'a göre kontrol etmek için küçük bir Wrapper yazıyoruz
 function Layout() {
@@ -45,14 +60,7 @@ function Layout() {
             </>
           }
         />
-        <Route
-          path="/project/:id"
-          element={
-            <>
-              <Deid />
-            </>
-          }
-        />
+        <Route path="/project/:id" element={<ProjectDetail />} />
       </Routes>
 
       {/* Footer her zaman görünsün */}

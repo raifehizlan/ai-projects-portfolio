@@ -25,7 +25,7 @@ const LiveDemo = ({
               id="textInput"
               value={inputText}
               onChange={onInputChange}
-              placeholder="Type a German medical text here..."
+              placeholder="Type your medical text here..."
             />
           </div>
           <button onClick={onSubmit}>Predict</button>

@@ -4,7 +4,16 @@ const projectsData = [
     title: "De-identification of PHI",
     description:
       "Developed models for English, German, Spanish, Romanian, Turkish, French, Italian, and Arabic. Applied the LLM-in-the-Loop method for high-precision healthcare solutions.",
-    technologies: ["Python", "NLP", "LLMs", "Healthcare"],
+    technologies: [
+      "Python",
+      "NLP",
+      "FastAPI",
+      "LLMs",
+      "Docker",
+      "Azure",
+      "React",
+      "Transformers",
+    ],
     image: "/img/deid.png",
     githubLink: "https://github.com/your-repo-1",
     liveDemoLink: "https://your-live-demo-1.com",
@@ -13,11 +22,21 @@ const projectsData = [
     id: 2,
     title: "NER Models for Adverse Drug Effects (ADE)",
     description:
-      "Recognition of Adverse Drug Effects (ADE) and pharmaceutical relations in medical case reports and electronic health records. High accuracy in multiple languages.",
-    technologies: ["Python", "NLP", "NER"],
+      "Recognition of Adverse Drug Effects (ADE) and pharmaceutical relations in medical case reports and electronic health records. High accuracy in healthcare models.",
+    technologies: [
+      "Python",
+      "NLP",
+      "NER",
+      "Transformers",
+      "Flask",
+      "Flasgger",
+      "Docker",
+      "Azure",
+      "React",
+    ],
     image: "/img/adeNer.jpeg",
     githubLink: "https://github.com/your-repo-2",
-    liveDemoLink: null,
+    liveDemoLink: "https://your-live-demo-2.com",
   },
   {
     id: 3,
@@ -27,7 +46,7 @@ const projectsData = [
     technologies: ["Python", "Machine Learning", "Classification"],
     image: "/img/adeClassification.jpeg", // Placeholder image
     githubLink: "https://github.com/your-repo-3",
-    liveDemoLink: null,
+    liveDemoLink: "https://your-live-demo-3.com",
   },
   {
     id: 4,
@@ -37,7 +56,7 @@ const projectsData = [
     technologies: ["Python", "NLP", "Relation Extraction"],
     image: "/img/relationExtraction.jpeg", // Placeholder image
     githubLink: "https://github.com/your-repo-4",
-    liveDemoLink: null,
+    liveDemoLink: "https://your-live-demo-4.com",
   },
   {
     id: 5,
@@ -47,7 +66,7 @@ const projectsData = [
     technologies: ["Python", "NLP", "Assertion Detection"],
     image: "/img/assertionStatus.png", // Placeholder image
     githubLink: "https://github.com/your-repo-5",
-    liveDemoLink: null,
+    liveDemoLink: "https://your-live-demo-5.com",
   },
   {
     id: 6,
@@ -57,7 +76,7 @@ const projectsData = [
     technologies: ["Python", "NLP", "ICD-10 Coding"],
     image: "/img/icd10Finder.jpeg", // Placeholder image
     githubLink: "https://github.com/your-repo-6",
-    liveDemoLink: null,
+    liveDemoLink: "https://your-live-demo-6.com",
   },
 ];
 

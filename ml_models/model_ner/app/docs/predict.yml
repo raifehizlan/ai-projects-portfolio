@@ -1,0 +1,49 @@
+tags:
+  - Prediction
+summary: Performs NER prediction
+description: Performs Named Entity Recognition (NER) on medical text input.
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  - in: body
+    name: body
+    required: true
+    schema:
+      type: object
+      required:
+        - text
+      properties:
+        text:
+          type: array
+          items:
+            type: string
+          example:
+            - "The patient was prescribed 500mg of Ibuprofen for 7 days."
+        entity:
+          type: array
+          items:
+            type: string
+          example:
+            - "Drug"
+            - "Dosage"
+responses:
+  200:
+    description: Successful prediction
+    schema:
+      type: object
+      properties:
+        status:
+          type: boolean
+        data_type:
+          type: string
+        output:
+          type: array
+        error:
+          type: string
+          nullable: true
+  400:
+    description: Invalid input
+  500:
+    description: Internal server error

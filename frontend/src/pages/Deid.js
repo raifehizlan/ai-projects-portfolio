@@ -65,8 +65,8 @@ const Deid = () => {
         methods={deidModelDetails[0].methods}
         users={deidModelDetails[0].users}
       />
-      <EntityList />
-      <MetricsTable />
+      <EntityList model="deid" />
+      <MetricsTable model="deid" />
 
       <ExampleDemo
         activeDemo={activeDemo}
