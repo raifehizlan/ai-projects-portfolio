@@ -46,9 +46,9 @@
   
   .timeline {
     display: none;
-    border-left: 2px solid #5A45C7;
-    padding-left: 20px;
-    margin-top: 1rem;
+    border-left: 1px solid #5A45C7;
+    padding-left: 3px;
+    margin-top: 0.2rem;
   }
   
   .timeline.active {

@@ -2,7 +2,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from decouple import config
-from transformers import AutoTokenizer, AutoModelForTokenClassification
+from transformers import AutoModelForTokenClassification, AutoTokenizer 
 from aimped.nlp.tokenizer import sentence_tokenizer, word_tokenizer
 from aimped.nlp.pipeline import Pipeline
 import torch

@@ -11,10 +11,15 @@ ml_models/model_deid/app/.env
 ml_models/model_deid/app/model_downloaded
 ml_models/model_deid/app/predict.ipynb
 ml_models/model_deid/app/FASTAPI.log
+
 ml_models/model_ner/app/.env
 ml_models/model_ner/app/model_downloaded
 ml_models/model_ner/app/deneme.ipynb
 
+ml_models/model_cls/app/FASTAPI.log
+ml_models/model_cls/app/.env
+ml_models/model_cls/app/model_downloaded
+ml_models/model_cls/app/deneme.ipynb
 
 ########################Later it will be organized#################################
 
