@@ -1,13 +1,15 @@
 fastapi==0.95.0
 uvicorn==0.23.0
-torch==2.0.0  # PyTorch sürümünü cihazınıza göre seçin, CUDA kullanıyorsanız uyumlu sürüm seçmelisiniz
-transformers==4.30.0
+torch==2.0.0  
+transformers==4.26.1
+sentencepiece==0.1.96
 azure-storage-blob
 requests==2.28.1
 pydantic==1.10.5
 python-decouple
-aimped
-numpy==1.24.4
+numpy==1.21.5
 nltk==3.7
 ipython
 seqeval
+xformers
+
