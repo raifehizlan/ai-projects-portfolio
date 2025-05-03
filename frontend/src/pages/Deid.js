@@ -69,6 +69,7 @@ const Deid = () => {
       <MetricsTable model="deid" />
 
       <ExampleDemo
+        modelType="ner" // veya "ner", "summarization", vb.
         activeDemo={activeDemo}
         inputText={inputDemoText}
         parsedResult={parsedDemoResult}

@@ -22,6 +22,7 @@ import "./App.css";
 import ScrollToTop from "./components/ScrollToTop";
 import Ner from "./pages/Ner";
 import DeidMarkdown from "./pages/DeidMarkdown";
+import Classification from "./pages/Classification";
 
 // Proje ID'ye göre uygun bileşeni döndüren yardımcı fonksiyon
 function ProjectDetail() {
@@ -32,6 +33,8 @@ function ProjectDetail() {
       return <Deid />;
     case "2": // id'yi string olarak karşılaştırın
       return <Ner />;
+    case "3": // id'yi string olarak karşılaştırın
+      return <Classification />;
     default:
       return <div className="proje-bulunamadi">Project is not found.</div>;
   }

@@ -2,6 +2,7 @@ import React from "react";
 import "./MetricsTable.css";
 import deidMetrics from "../data/deidMetrics";
 import nerMetrics from "../data/nerMetrics";
+import clsMetrics from "../data/clsMetrics";
 
 const MetricsTable = ({ model }) => {
   let METRICS = [];
@@ -11,6 +12,8 @@ const MetricsTable = ({ model }) => {
     METRICS = nerMetrics;
   } else if (model === "deid") {
     METRICS = deidMetrics;
+  } else if (model === "cls") {
+    METRICS = clsMetrics;
   }
 
   return (

@@ -1,8 +1,9 @@
 import React from "react";
 import MaskedText from "./MaskedText";
+import ClassificationChart from "./ClassificationChart";
 import JsonViewer from "./JsonViewer";
 import "./LiveDemo.css";
-import { exportToJson, exportToCsv } from "../utils/exportUtils";
+import { exportToJson } from "../utils/exportUtils";
 
 const LiveDemo = ({
   inputText,
@@ -12,11 +13,41 @@ const LiveDemo = ({
   result,
   showJson,
   toggleJson,
+  modelType,
 }) => {
+  const renderPrediction = () => {
+    switch (modelType) {
+      case "ner":
+        return parsedResult ? (
+          <MaskedText parsedData={parsedResult} />
+        ) : (
+          <span style={{ color: "#999" }}>No prediction yet.</span>
+        );
+
+      case "cls":
+        return parsedResult ? (
+          <ClassificationChart result={parsedResult} />
+        ) : (
+          <span style={{ color: "#999" }}>No prediction yet.</span>
+        );
+
+      case "summarization":
+        return parsedResult ? (
+          <p>{parsedResult}</p>
+        ) : (
+          <span style={{ color: "#999" }}>No prediction yet.</span>
+        );
+
+      default:
+        return <span>Unsupported model type.</span>;
+    }
+  };
+
   return (
     <section>
       <h2>⚡ Try It Yourself</h2>
       <div className="demo">
+        {/* Input */}
         <div className="input-container">
           <label htmlFor="textInput" className="input-label">
             Enter Text
@@ -32,15 +63,10 @@ const LiveDemo = ({
           <button onClick={onSubmit}>Predict</button>
         </div>
 
+        {/* Output */}
         <div className="result-container">
           <label className="result-label">Predicted Output</label>
-          <div className="masked-output">
-            {parsedResult ? (
-              <MaskedText parsedData={parsedResult} />
-            ) : (
-              <span style={{ color: "#999" }}>No prediction yet.</span>
-            )}
-          </div>
+          <div className="masked-output">{renderPrediction()}</div>
 
           {parsedResult && (
             <div className="export-buttons">

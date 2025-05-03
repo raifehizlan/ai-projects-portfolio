@@ -68,6 +68,7 @@ const Ner = () => {
       <MetricsTable model="ner" />
 
       <ExampleDemo
+        modelType="ner" // veya "ner", "summarization", vb.
         activeDemo={activeDemo}
         inputText={inputDemoText}
         parsedResult={parsedDemoResult}

@@ -1,4 +1,4 @@
-const ENTITY_MODELS = {
+const entities = {
   deid: [
     "AGE",
     "CITY",
@@ -36,6 +36,7 @@ const ENTITY_MODELS = {
     "Dosage",
     "Frequency",
   ],
+  cls: ["Positive", "Negative"],
 };
 
-export default ENTITY_MODELS;
+export default entities;

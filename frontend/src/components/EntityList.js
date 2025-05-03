@@ -1,53 +1,15 @@
 import React from "react";
 import "./EntityList.css";
-
-const ENTITY_MODELS = {
-  deid: [
-    "AGE",
-    "CITY",
-    "COUNTRY",
-    "DATE",
-    "DOCTOR",
-    "EMAIL",
-    "HOSPITAL",
-    "IDNUM",
-    "ORGANIZATION",
-    "PATIENT",
-    "PHONE",
-    "PROFESSION",
-    "SSN",
-    "STREET",
-    "ZIP",
-    "ACCOUNT",
-    "DLN",
-    "IP",
-    "FAX",
-    "LICENCE",
-    "PLATE",
-    "URL",
-    "VIN",
-  ],
-  ner: [
-    "Drug",
-    "ADE",
-    "Reason",
-    "Duration",
-    "Form",
-    "Route",
-    "Strength",
-    "Dosage",
-    "Frequency",
-  ],
-};
+import entities from "../data/entities";
 
 const EntityList = ({ model }) => {
   // Props'u destructuring ile alın
-  const entities = ENTITY_MODELS[model] || [];
+  const entitiess = entities[model] || [];
   return (
     <section className="entities">
       <h2>📋 Supported Entity Types</h2>
       <ul className="entity-list">
-        {entities.map((entity) => (
+        {entitiess.map((entity) => (
           <li key={entity}>{entity}</li>
         ))}
       </ul>
