@@ -1,0 +1,20 @@
+
+.cont {
+    margin-top: 100px;
+    max-width: 100%;
+    overflow: visible;
+  }
+  
+/* Mobil görünüm */
+@media (max-width: 1041px) {
+    .cont {
+        margin-top: 150px;
+        max-width: 100%;
+        overflow: visible;
+    }}
+/* Mobil görünüm */
+@media (max-width: 768px) {
+    .cont {
+        max-width: 100%;
+        overflow: visible;
+    }}

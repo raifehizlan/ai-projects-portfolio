@@ -47,3 +47,17 @@
   .research-description p {
     margin-bottom: 0.5rem;
   }
+
+
+  .research-link {
+    display: inline-block;
+    margin-top: 8px;
+    color: #4f46e5;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  .research-link:hover {
+    text-decoration: underline;
+  }
+  

@@ -21,6 +21,7 @@ import Deid from "./pages/Deid";
 import "./App.css";
 import ScrollToTop from "./components/ScrollToTop";
 import Ner from "./pages/Ner";
+import DeidMarkdown from "./pages/DeidMarkdown";
 
 // Proje ID'ye göre uygun bileşeni döndüren yardımcı fonksiyon
 function ProjectDetail() {
@@ -32,11 +33,20 @@ function ProjectDetail() {
     case "2": // id'yi string olarak karşılaştırın
       return <Ner />;
     default:
-      return <div className="proje-bulunamadi">Proje bulunamadı.</div>;
+      return <div className="proje-bulunamadi">Project is not found.</div>;
   }
 }
 
+function ResearcDetail() {
+  const { id } = useParams();
 
+  switch (id) {
+    case "1": // id'yi string olarak karşılaştırın çünkü URL parametreleri genellikle stringdir
+      return <DeidMarkdown />;
+    default:
+      return <div className="proje-bulunamadi">Article is not found.</div>;
+  }
+}
 // Header'ı route'a göre kontrol etmek için küçük bir Wrapper yazıyoruz
 function Layout() {
   const location = useLocation();
@@ -62,6 +72,7 @@ function Layout() {
           }
         />
         <Route path="/project/:id" element={<ProjectDetail />} />
+        <Route path="/research/:id" element={<ResearcDetail />} />
       </Routes>
 
       {/* Footer her zaman görünsün */}
