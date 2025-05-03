@@ -43,7 +43,16 @@ const projectsData = [
     title: "ADE Classification Model",
     description:
       "Developed a classification model to categorize Adverse Drug Effects based on their type and severity from medical texts.",
-    technologies: ["Python", "Machine Learning", "Classification"],
+    technologies: [
+      "Python",
+      "Machine Learning",
+      "Classification",
+      "React",
+      "FastAPI",
+      "Transformers",
+      "Azure",
+      "Docker",
+    ],
     image: "/img/adeClassification.jpeg", // Placeholder image
     githubLink: "https://github.com/raifehizlan/projects-portfolio",
     liveDemoLink: "https://your-live-demo-3.com",
