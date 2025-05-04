@@ -25,13 +25,8 @@ class AzureModelLoader:
                 blob_name = blob.name
                 blob_client = self.container_client.get_blob_client(blob)
 
-                # Yerel dosya yolu (klasör yapısını koruyarak dosya yolu oluşturuluyor)
-                # Blob adı, prefix sonrası kalan kısmı yerel dosya yoluna dönüştürüyoruz
-                relative_path = os.path.relpath(blob_name, self.prefix)  # prefix sonrası kısımlar
-                local_path = os.path.join(self.local_dir, relative_path)  # yerel yol
-
-                # Klasörler yoksa oluşturuluyor
-                os.makedirs(os.path.dirname(local_path), exist_ok=True)
+                # Yerel dosya yolu (sadece dosya adı, klasör yapısı korunmuyor)
+                local_path = os.path.join(self.local_dir, os.path.basename(blob_name))
 
                 # Dosya zaten varsa indirilmiyor
                 if os.path.exists(local_path):

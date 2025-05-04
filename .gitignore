@@ -28,6 +28,13 @@ ml_models/model_assertion/app/.env
 ml_models/model_assertion/app/model_downloaded
 ml_models/model_assertion/app/deneme.ipynb
 
+
+
+ml_models/model_relation/app/FASTAPI.log
+ml_models/model_relation/app/.env
+ml_models/model_relation/app/model_downloaded
+ml_models/model_relation/app/deneme.ipynb
+
 ########################Later it will be organized#################################
 
 

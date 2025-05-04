@@ -13,4 +13,3 @@ ipython
 seqeval
 xformers
 sentencepiece
-protobuf==3.20.*
