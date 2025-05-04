@@ -1,4 +1,4 @@
-from typing import Dict, List
+from typing import Dict, List , Optional
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 import json, os, warnings, logging, sys
@@ -29,7 +29,7 @@ app.add_middleware(
 
 class PredictionRequest(BaseModel):
     text: List[str] = Field(..., example=["Patient denies experiencing nausea."], description="List of input texts.")
-    entity: List[str] = Field(..., example=["absent", "associated_with_someone_else","conditional", "hypothetical","possible","present"], description="Entity types to apply assertion classification.")
+    entity: List[str] = Field(None, example=["absent", "associated_with_someone_else","conditional", "hypothetical","possible","present"], description="Entity types to apply assertion classification.")
 class PredictionItem(BaseModel):
     begin: int
     end: int
@@ -154,8 +154,7 @@ class AssertionModel:
 
         if len(texts) == 0:
             return {"status": False, "error": "No input text provided."}
-        if len(white_labels) == 0:
-            return {"status": False, "error": "No input entity provided."}
+
 
         try:
             results = [self.get_prediction(text, self.classifier, white_labels) for text in texts]

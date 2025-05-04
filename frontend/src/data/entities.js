@@ -37,6 +37,15 @@ const entities = {
     "Frequency",
   ],
   cls: ["Positive", "Negative"],
+
+  ass: [
+    "absent",
+    "associated_with_someone_else",
+    "conditional",
+    "hypothetical",
+    "possible",
+    "present",
+  ],
 };
 
 export default entities;

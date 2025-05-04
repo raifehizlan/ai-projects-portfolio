@@ -69,6 +69,7 @@ const Ner = () => {
 
       <ExampleDemo
         modelType="ner" // veya "ner", "summarization", vb.
+        result={parsedDemoEntities}
         activeDemo={activeDemo}
         inputText={inputDemoText}
         parsedResult={parsedDemoResult}

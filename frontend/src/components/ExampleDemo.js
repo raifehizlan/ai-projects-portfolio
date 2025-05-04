@@ -5,7 +5,9 @@ import ClassificationChart from "./ClassificationChart"; // Text classification 
 import "./ExampleDemo.css";
 
 const ExampleDemo = ({
-  modelType, // e.g., "ner", "classification", "summarization"
+  modelType, // e.g., "ner", "classification",
+  // "summarization"
+  result,
   activeDemo,
   inputText,
   parsedResult,
@@ -19,8 +21,6 @@ const ExampleDemo = ({
   };
 
   const renderPredictionResult = () => {
-    console.log("parsedResults", parsedResult);
-
     switch (modelType) {
       case "ner":
         return (
@@ -29,7 +29,7 @@ const ExampleDemo = ({
               <MaskedText parsedData={parsedResult} />
             </div>
             <JsonViewer
-              data={parsedResult}
+              data={result}
               show={showJson}
               toggle={toggleJson}
               copyData={entities}

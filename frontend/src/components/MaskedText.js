@@ -35,6 +35,30 @@ const entityStyles = {
   Strength: { backgroundColor: "#fce7f3", color: "#be185d" }, // Pembe tonları
   Dosage: { backgroundColor: "#ede9fe", color: "#7c3aed" }, // Mor tonları
   Frequency: { backgroundColor: "#fae8ff", color: "#9d174d" }, // Fuşya benzeri          // Mor tonları
+  present: {
+    backgroundColor: "#d1fae5", // açık yeşil
+    color: "#065f46", // koyu yeşil
+  },
+  absent: {
+    backgroundColor: "#fecaca", // açık kırmızı
+    color: "#7f1d1d", // koyu kırmızı
+  },
+  possible: {
+    backgroundColor: "#fef08a", // canlı sarı
+    color: "#92400e", // koyu turuncu
+  },
+  conditional: {
+    backgroundColor: "#bae6fd", // açık mavi
+    color: "#1e3a8a", // koyu mavi
+  },
+  hypothetical: {
+    backgroundColor: "#ddd6fe", // lavanta
+    color: "#4c1d95", // mor
+  },
+  associated_with_someone_else: {
+    backgroundColor: "#e9d5ff", // açık mor
+    color: "#6b21a8", // koyu mor
+  },
 };
 
 const MaskedText = ({ parsedData }) => {
