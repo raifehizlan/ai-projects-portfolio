@@ -21,6 +21,13 @@ ml_models/model_cls/app/.env
 ml_models/model_cls/app/model_downloaded
 ml_models/model_cls/app/deneme.ipynb
 
+
+
+ml_models/model_assertion/app/FASTAPI.log
+ml_models/model_assertion/app/.env
+ml_models/model_assertion/app/model_downloaded
+ml_models/model_assertion/app/deneme.ipynb
+
 ########################Later it will be organized#################################
 
 
