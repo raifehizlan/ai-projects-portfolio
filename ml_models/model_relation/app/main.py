@@ -3,19 +3,22 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 import json, os, warnings, logging, sys
 from fastapi.middleware.cors import CORSMiddleware
+from aimped.nlp.relation_visualizer import *
 from decouple import config
+from PIL import Image, ImageFont, ImageDraw
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, AutoModelForTokenClassification, pipeline
 from model_loader import AzureModelLoader
 from aimped.nlp.pipeline import Pipeline  # NER ve assertion metodlarının olduğu modül
 from aimped.nlp.tokenizer import sentence_tokenizer, word_tokenizer
+import pandas as pd
 
 warnings.filterwarnings("ignore")
 
 print("Model dependencies imported")
 
 
-app = FastAPI(title="Assertion Status API", version="1.0.0", description="Assertion Status Prediction Service")
+app = FastAPI(title="Relation Extraction API", version="1.0.0", description="Relation Extraction Service")
 
 app.add_middleware(
     CORSMiddleware,
@@ -28,20 +31,25 @@ app.add_middleware(
 # ---------------- Models ------------------
 
 class PredictionRequest(BaseModel):
-    text: List[str] = Field(..., example=["Patient denies experiencing nausea."], description="List of input texts.")
-    entity: List[str] = Field(None, example=["absent", "associated_with_someone_else","conditional", "hypothetical","possible","present"], description="Entity types to apply assertion classification.")
-class PredictionItem(BaseModel):
-    begin: int
-    end: int
-    ner_label: str
-    chunk: str
-    assertion: str
-    score: float
+    text: List[str] = Field(..., example=["The patient was prescribed 500 mg paracetamol twice daily for 5 days."],  description="List of input texts.")
+    entity: List[str] = Field(None, example=[
+    "Strength-Drug",
+    "Form-Drug",
+    "Frequency-Drug",
+    "Route-Drug",
+    "Dosage-Drug",
+    "Reason-Drug",
+    "ADE-Drug",
+    "Duration-Drug"
+]
+, description="Entity types to apply relation extraction.")
+
     
 class PredictionResponse(BaseModel):
     status: bool
     data_type: str = "data_json"
-    output: List[List[PredictionItem]] = None
+    output: List[List[Dict]] = None
+    data_svg: Optional[str] = None  # SVG içeriği burada
     error: str = None
 
 class HealthResponse(BaseModel):
@@ -50,7 +58,7 @@ class HealthResponse(BaseModel):
 
 # ---------------- Model Class ------------------
 
-class AssertionModel:
+class RelationModel:
     def __init__(self):
         self.name = config("MODEL_NAME")
         self.device = "cpu"
@@ -62,16 +70,16 @@ class AssertionModel:
         self.local_dir = os.path.abspath(__file__).replace("main.py", config("LOCAL_FOLDER"))
 
         self.ner_model_dir = self.local_dir + "/ner_model"
-        self.as_model_dir = self.local_dir +  "/assertion_model"
-        print(self.ner_model_dir)
-        print(self.as_model_dir)
+        self.rel_model_dir = self.local_dir +  "/rel_model"
+
         # Internal state
         self.classifier = None
         self.pipe = None
-        self.as_model = None
-        self.as_tokenizer = None
+        self.rel_model = None
+        self.rel_tokenizer = None
         self.ner_model = None
         self.ner_tokenizer = None
+        self.return_svg = True
         self.load()
 
 
@@ -92,10 +100,10 @@ class AssertionModel:
     def load(self):
         try:
             # Load assertion classifier
-            self.as_model = AutoModelForSequenceClassification.from_pretrained(self.as_model_dir)
-            self.as_tokenizer = AutoTokenizer.from_pretrained(self.as_model_dir)
+            self.rel_model = AutoModelForSequenceClassification.from_pretrained(self.rel_model_dir)
+            self.rel_tokenizer = AutoTokenizer.from_pretrained(self.rel_model_dir)
             device_id = 0 if self.device == 'cuda' else -1
-            self.classifier = pipeline(task="sentiment-analysis", model=self.as_model, tokenizer=self.as_tokenizer, truncation=True, max_length=512, device=device_id)
+            self.classifier = pipeline(task="sentiment-analysis", model=self.rel_model, tokenizer=self.rel_tokenizer, truncation=True, max_length=512, device=device_id)
 
             # Load NER model
             self.ner_model = AutoModelForTokenClassification.from_pretrained(self.ner_model_dir).to(self.device)
@@ -108,10 +116,10 @@ class AssertionModel:
             print(f"Failed to load models: {e}")
             self.ready = False
 
-    def get_prediction(self, text: str, classifier, assertion_white_label_list):
+    def get_prediction(self, text: str, classifier, relation_white_label_list):
         sentences = sentence_tokenizer(text, "english")
         sents_tokens_list = word_tokenizer(sentences)
-        white_label_list = ["problem", "test", "treatment"]
+        white_label_list = ['ADE', 'Dosage', 'Drug', 'Duration', 'Form', 'Frequency', 'Reason', 'Route', 'Strength']
 
         tokens, preds, probs, begins, ends, sent_begins, sent_ends, sent_idxs = self.pipe.ner_result(
             text=text,
@@ -133,15 +141,35 @@ class AssertionModel:
             sent_ends=sent_ends,
             sent_idxs=sent_idxs,
         )
-        if not assertion_white_label_list:
-            assertion_white_label_list = ["absent", "associated_with_someone_else","conditional", "hypothetical","possible","present"]
-        
-        
-        results = self.pipe.assertion_result(
-            ner_results=results,
-            classifier=classifier,
-            assertion_white_label_list=assertion_white_label_list,
-            sentences=sentences,
+        if not relation_white_label_list:
+            relation_white_label_list =  [
+                                        "Strength-Drug",
+                                        "Form-Drug",
+                                        "Frequency-Drug",
+                                        "Route-Drug",
+                                        "Dosage-Drug",
+                                        "Reason-Drug",
+                                        "ADE-Drug",
+                                        "Duration-Drug",
+                                        ]
+
+
+        relation_pairs = [  ("Drug", "Strength"),
+                            ("Drug", "Form"),
+                            ("Drug", "Frequency"),
+                            ("Drug", "Route"),
+                            ("Drug", "Dosage"),
+                            ("Drug", "Reason"),
+                            ("Drug", "ADE"),
+                            ("Drug", "Duration")]
+
+        results = self.pipe.relation_result(
+            sentences = sentences, 
+            ner_chunk_results=results,
+            relation_classifier=classifier,
+            relation_white_label_list=relation_white_label_list,
+            relation_pairs = relation_pairs,
+            return_svg=self.return_svg
         )
         return results
 
@@ -150,22 +178,32 @@ class AssertionModel:
             self.load()
 
         texts = request.get("text", [])
-        white_labels = request.get("entity", [])
+        relation_white_label_list = request.get("entity", [])
 
         if len(texts) == 0:
             return {"status": False, "error": "No input text provided."}
 
 
-        try:
-            results = [self.get_prediction(text, self.classifier, white_labels) for text in texts]
-            
-            return  {"status": True, "data_type": self.data_type, "output": results}
-        except Exception as e:
-            return {"status": False, "error": str(e)}
+
+        results = [self.get_prediction(text, self.classifier, relation_white_label_list) for text in texts]
+        print("output",results)
+        if self.return_svg and len(results[0]):
+            final =  pd.DataFrame(results[0]).drop(columns = ['sentID','sentence','sent_begin1','sent_end1','sent_begin2','sent_end2'],axis=1).to_dict(orient='records')
+            text, svg_input = vizu(results[0])
+            display = RelationExtractionVisualizer()
+            svg = display.display(text, svg_input, show_relations = True, return_html = True)
+        
+            return  {"status": True, "data_type": self.data_type, "output": final,
+            "data_svg"   : svg}
+        else:
+            return {"status"      : True,
+                            "data_type"  : self.data_type,
+                            "output"     : results}
+
 
 # ---------------- Instance ------------------
 
-model_instance = AssertionModel()
+model_instance = RelationModel()
 
 # ---------------- Routes ------------------
 

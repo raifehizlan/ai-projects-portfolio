@@ -46,6 +46,17 @@ const entities = {
     "possible",
     "present",
   ],
+
+  rel: [
+    "Strength-Drug",
+    "Form-Drug",
+    "Frequency-Drug",
+    "Route-Drug",
+    "Dosage-Drug",
+    "Reason-Drug",
+    "ADE-Drug",
+    "Duration-Drug",
+  ],
 };
 
 export default entities;

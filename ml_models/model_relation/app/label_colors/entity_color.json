@@ -1,0 +1,11 @@
+{
+    "ADE": "#C70039",
+    "Dosage":"#C70039", 
+    "Drug": "#FFC300", 
+    "Duration":"#FFC300", 
+    "Form":"#C70039", 
+    "Frequency":"#FFC300", 
+    "Reason":"#C70039", 
+    "Route":"#FFC300", 
+    "Strength":"#C70039"
+}

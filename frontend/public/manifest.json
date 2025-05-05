@@ -1,0 +1,18 @@
+{
+    "short_name": "Raife-ai",
+    "name": "Raife-ai",
+    "icons": [
+      {
+        "src": "/ki-icon.png",
+        "sizes": "192x192",
+        "type": "img/png"
+      }
+
+    ],
+    "start_url": ".",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#000000"
+  }
+  
