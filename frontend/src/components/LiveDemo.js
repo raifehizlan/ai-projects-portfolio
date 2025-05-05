@@ -39,7 +39,7 @@ const LiveDemo = ({
         );
 
       default:
-        return <span>Unsupported model type.</span>;
+        return <span>No prediction yet.</span>;
     }
   };
 

@@ -35,7 +35,7 @@ function ProjectDetail() {
       return <Ner />;
     case "3": // id'yi string olarak karşılaştırın
       return <Classification />;
-    case "4": // id'yi string olarak karşılaştırın
+    case "5": // id'yi string olarak karşılaştırın
       return <Assertion />;
     default:
       return <div className="proje-bulunamadi">Project is not found.</div>;
