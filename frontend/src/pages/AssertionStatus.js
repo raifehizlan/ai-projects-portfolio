@@ -59,7 +59,6 @@ const Assertion = () => {
 
   return (
     <div className="deid-container">
-      <BackButton />
       <h1>Clinical Assertion Status Model</h1>
       <ModelDetails
         title={assertionModelDetails[0].title}

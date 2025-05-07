@@ -56,7 +56,6 @@ const Classification = () => {
 
   return (
     <div className="deid-container">
-      <BackButton />
       <h1>ADE Text Classification</h1>
       <ModelDetails
         title={clsModelDetails[0].title}

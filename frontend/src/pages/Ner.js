@@ -56,7 +56,6 @@ const Ner = () => {
 
   return (
     <div className="deid-container">
-      <BackButton />
       <h1>Clinical Named Entity Recognition Model for Medication Extraction</h1>
       <ModelDetails
         title={nerModelDetails[0].title}

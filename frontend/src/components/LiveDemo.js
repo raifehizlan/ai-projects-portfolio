@@ -6,6 +6,7 @@ import "./LiveDemo.css";
 import { exportToJson } from "../utils/exportUtils";
 
 const LiveDemo = ({
+  parsedUrl,
   inputText,
   onInputChange,
   onSubmit,
@@ -31,9 +32,9 @@ const LiveDemo = ({
           <span style={{ color: "#999" }}>No prediction yet.</span>
         );
 
-      case "summarization":
+      case "rel":
         return parsedResult ? (
-          <p>{parsedResult}</p>
+          <img src={parsedUrl} alt="" />
         ) : (
           <span style={{ color: "#999" }}>No prediction yet.</span>
         );

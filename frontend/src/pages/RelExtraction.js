@@ -1,14 +1,106 @@
-import React from "react";
-import RelationVisualizer from "../components/RelationVisualizer";
-import output from "../data/output"; // JSON verisini import et
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import BackButton from "../components/BackButton";
+import ModelDetails from "../components/ModelDetails";
+import EntityList from "../components/EntityList";
+import MetricsTable from "../components/MetricsTable";
+import JsonViewer from "../components/JsonViewer";
 
-function RelExtraction() {
+import relExampleData from "../data/relExampleData";
+import "./Deid.css";
+
+import ExampleDemo from "../components/ExampleDemo";
+import LiveDemo from "../components/LiveDemo";
+import relModelDetails from "../data/relModelDetails";
+
+const Assertion = () => {
+  const [inputText, setInputText] = useState("");
+  const [result, setResult] = useState(null);
+  const [showJson, setShowJson] = useState(false);
+  const [parsedResult, setParsedResult] = useState(null);
+
+  const [selectedDemo, setSelectedDemo] = useState(0);
+  const [inputDemoText, setInputDemoText] = useState("");
+  const [parsedDemoResult, setParsedDemoResult] = useState([]);
+  const [parsedDemoUrl, setparsedDemoUrl] = useState("");
+  const [parsedUrl, setParsedUrl] = useState("");
+  const [parsedDemoEntities, setParsedDemoEntities] = useState([]);
+  const [activeDemo, setActiveDemo] = useState(0);
+
+  const handleDemoSelection = (demo) => {
+    setSelectedDemo(demo);
+    const demoText = relExampleData[demo].text;
+    const demoEntities = relExampleData[demo].entities;
+    const demoUrl = relExampleData[demo].data_svg;
+    console.log("demoUrl", demoUrl);
+    setInputDemoText(demoText);
+    setParsedDemoResult(demoEntities);
+
+    setparsedDemoUrl(demoUrl);
+    setParsedDemoEntities(demoEntities);
+    setActiveDemo(demo);
+  };
+
+  useEffect(() => {
+    handleDemoSelection(0);
+  }, []);
+
+  const handleSubmit = async () => {
+    try {
+      const res = await axios.post("http://localhost:8000/predict", {
+        text: [inputText],
+      });
+      const predictionOutput = res.data.output[0];
+      const url = res.data.data_svg;
+      console.log(predictionOutput);
+      setResult(predictionOutput);
+      setParsedResult(predictionOutput);
+
+      setParsedUrl(url);
+    } catch (error) {
+      console.error(error.response.data.detail);
+      alert("Backend'e erişilemedi.");
+    }
+  };
+
   return (
-    <div className="rel">
-      <h1>Relation Extraction Results</h1>
-      <RelationVisualizer output={output} />
+    <div className="deid-container">
+      <h1>Clinical Relation Extraction Model</h1>
+      <ModelDetails
+        title={relModelDetails[0].title}
+        description={relModelDetails[0].description}
+        methods={relModelDetails[0].methods}
+        users={relModelDetails[0].users}
+      />
+      <EntityList model="rel" />
+      <MetricsTable model="rel" />
+
+      <ExampleDemo
+        modelType="rel" // veya "ner", "summarization", vb.
+        parsedDemoUrl={parsedDemoUrl}
+        result={parsedDemoEntities}
+        activeDemo={activeDemo}
+        inputText={inputDemoText}
+        parsedResult={parsedDemoUrl}
+        entities={parsedDemoEntities}
+        showJson={showJson}
+        toggleJson={() => setShowJson(!showJson)}
+        onDemoChange={handleDemoSelection}
+      />
+
+      <LiveDemo
+        modelType="rel" // veya "ner", "summarization", vb.
+        parsedUrl={parsedUrl}
+        inputText={inputText}
+        onInputChange={(e) => setInputText(e.target.value)}
+        onSubmit={handleSubmit}
+        parsedResult={parsedResult}
+        result={result}
+        showJson={showJson}
+        toggleJson={() => setShowJson(!showJson)}
+      />
     </div>
   );
-}
+};
 
-export default RelExtraction;
+export default Assertion;

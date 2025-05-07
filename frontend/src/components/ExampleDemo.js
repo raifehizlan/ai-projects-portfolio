@@ -7,6 +7,7 @@ import "./ExampleDemo.css";
 const ExampleDemo = ({
   modelType, // e.g., "ner", "classification",
   // "summarization"
+  parsedDemoUrl,
   result,
   activeDemo,
   inputText,
@@ -19,7 +20,7 @@ const ExampleDemo = ({
   const handleCopy = () => {
     navigator.clipboard.writeText(inputText);
   };
-
+  console.log("parsedResult", parsedResult);
   const renderPredictionResult = () => {
     switch (modelType) {
       case "ner":
@@ -52,17 +53,17 @@ const ExampleDemo = ({
           </>
         );
 
-      case "summarization":
+      case "rel":
         return (
           <>
             <div className="masked-output">
-              <p>{parsedResult}</p>
+              <img src={parsedDemoUrl} title="Relation SVG" />
             </div>
             <JsonViewer
-              data={parsedResult}
+              data={entities}
               show={showJson}
               toggle={toggleJson}
-              copyData={parsedResult}
+              copyData={entities}
             />
           </>
         );

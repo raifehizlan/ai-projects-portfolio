@@ -57,7 +57,6 @@ const Deid = () => {
 
   return (
     <div className="deid-container">
-      <BackButton />
       <h1>Protecting Sensitive Medical Data with Privacy-First AI</h1>
       <ModelDetails
         title={deidModelDetails[0].title}

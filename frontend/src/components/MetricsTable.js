@@ -4,6 +4,7 @@ import deidMetrics from "../data/deidMetrics";
 import nerMetrics from "../data/nerMetrics";
 import clsMetrics from "../data/clsMetrics";
 import assMetrics from "../data/assMetrics";
+import relMetrics from "../data/relMetrics";
 
 const MetricsTable = ({ model }) => {
   let METRICS = [];
@@ -17,6 +18,8 @@ const MetricsTable = ({ model }) => {
     METRICS = clsMetrics;
   } else if (model === "ass") {
     METRICS = assMetrics;
+  } else if (model === "rel") {
+    METRICS = relMetrics;
   }
 
   return (

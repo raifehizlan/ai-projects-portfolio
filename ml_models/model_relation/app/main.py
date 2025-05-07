@@ -3,7 +3,6 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 import json, os, warnings, logging, sys
 from fastapi.middleware.cors import CORSMiddleware
-from aimped.nlp.relation_visualizer import *
 from decouple import config
 from PIL import Image, ImageFont, ImageDraw
 import torch
@@ -12,7 +11,9 @@ from model_loader import AzureModelLoader
 from aimped.nlp.pipeline import Pipeline  # NER ve assertion metodlarının olduğu modül
 from aimped.nlp.tokenizer import sentence_tokenizer, word_tokenizer
 import pandas as pd
-
+from relation_visualizer import *
+import uuid
+from svg_uploader import *
 warnings.filterwarnings("ignore")
 
 print("Model dependencies imported")
@@ -154,14 +155,10 @@ class RelationModel:
                                         ]
 
 
-        relation_pairs = [  ("Drug", "Strength"),
-                            ("Drug", "Form"),
-                            ("Drug", "Frequency"),
-                            ("Drug", "Route"),
-                            ("Drug", "Dosage"),
-                            ("Drug", "Reason"),
-                            ("Drug", "ADE"),
-                            ("Drug", "Duration")]
+        relation_pairs = [('Strength','Drug'),('Drug','Strength'),('Form','Drug'),('Drug','Form'),
+        ('Dosage','Drug'),('Drug','Dosage'),('Frequency','Drug'),('Drug','Frequency'),
+        ('Route','Drug'),('Drug','Route'),('Duration','Drug'),('Drug','Duration'),
+        ('Reason','Drug'),('Drug','Reason'),('ADE','Drug'),('Drug','ADE')]
 
         results = self.pipe.relation_result(
             sentences = sentences, 
@@ -186,15 +183,15 @@ class RelationModel:
 
 
         results = [self.get_prediction(text, self.classifier, relation_white_label_list) for text in texts]
-        print("output",results)
         if self.return_svg and len(results[0]):
             final =  pd.DataFrame(results[0]).drop(columns = ['sentID','sentence','sent_begin1','sent_end1','sent_begin2','sent_end2'],axis=1).to_dict(orient='records')
             text, svg_input = vizu(results[0])
+
             display = RelationExtractionVisualizer()
-            svg = display.display(text, svg_input, show_relations = True, return_html = True)
-        
-            return  {"status": True, "data_type": self.data_type, "output": final,
-            "data_svg"   : svg}
+            svg = display.display(text, svg_input, show_relations = True, return_html = True, )
+      
+            blob_url = upload_svg_to_azure(svg)
+            return  {"status": True, "data_type": self.data_type, "output": results, "data_svg":blob_url}
         else:
             return {"status"      : True,
                             "data_type"  : self.data_type,
