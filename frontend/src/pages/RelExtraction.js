@@ -47,7 +47,7 @@ const Assertion = () => {
 
   const handleSubmit = async () => {
     try {
-      const res = await axios.post("http://localhost:8000/predict", {
+      const res = await axios.post("http://localhost:8003/predict", {
         text: [inputText],
       });
       const predictionOutput = res.data.output[0];
