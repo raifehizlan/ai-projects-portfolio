@@ -77,16 +77,7 @@ const projectsData = [
     githubLink: "https://github.com/raifehizlan/projects-portfolio",
     liveDemoLink: "https://your-live-demo-5.com",
   },
-  {
-    id: 6,
-    title: "ICD-10 Code Finder Model",
-    description:
-      "Developed a model to automatically identify and assign relevant ICD-10 codes to patient diagnoses from medical text.",
-    technologies: ["Python", "NLP", "ICD-10 Coding"],
-    image: "/img/icd10Finder.jpeg", // Placeholder image
-    githubLink: "https://github.com/raifehizlan/projects-portfolio",
-    liveDemoLink: "https://your-live-demo-6.com",
-  },
+
 ];
 
 export default projectsData;

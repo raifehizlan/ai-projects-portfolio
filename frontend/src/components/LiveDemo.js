@@ -69,7 +69,7 @@ const LiveDemo = ({
           <label className="result-label">Predicted Output</label>
           <div className="masked-output">{renderPrediction()}</div>
 
-          {parsedResult && (
+          {result && (
             <div className="export-buttons">
               <button
                 onClick={() =>

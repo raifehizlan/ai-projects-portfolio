@@ -35,6 +35,15 @@ ml_models/model_relation/app/.env
 ml_models/model_relation/app/model_downloaded
 ml_models/model_relation/app/deneme.ipynb
 
+
+
+
+ml_models/model_icd10/app/FASTAPI.log
+ml_models/model_icd10/app/.env
+ml_models/model_icd10/app/model_downloaded
+ml_models/model_icd10/app/deneme.ipynb
+ml_models/model_icd10/app/__pycache__
+
 ########################Later it will be organized#################################
 
 
