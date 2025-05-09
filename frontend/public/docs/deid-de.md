@@ -49,15 +49,6 @@ Alle Modelle wurden über 10 Epochen mit `learning_rate=2e-5`, `max_length=512` 
 
 ### Leistung auf Englisch (i2b2 Testset)
 
-| Label         | F1-Score |
-|---------------|----------|
-| AGE           | 0.981    |
-| CITY          | 0.944    |
-| ORGANIZATION  | 0.876    |
-| PATIENT       | 0.967    |
-| ZIP           | 0.989    |
-| **Makro Ø**   | **0.931**|
-
 Im Vergleich zu anderen Methoden (z. B. Khin et al., GPT-4o) erzielen wir in mehreren Kategorien neue SOTA-Werte.
 
 ### Mehrsprachige Leistung

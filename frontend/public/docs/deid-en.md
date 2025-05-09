@@ -49,15 +49,6 @@ All models were trained for 10 epochs with `learning_rate=2e-5`, `max_length=512
 
 ### English Performance (i2b2 Test Set)
 
-| Label         | F1 Score |
-|---------------|----------|
-| AGE           | 0.981    |
-| CITY          | 0.944    |
-| ORGANIZATION  | 0.876    |
-| PATIENT       | 0.967    |
-| ZIP           | 0.989    |
-| **Macro Avg.**| **0.931**|
-
 Compared to other methods (e.g., Khin et al., GPT-4o), our approach achieves SOTA in several categories.
 
 ### Multilingual Performance

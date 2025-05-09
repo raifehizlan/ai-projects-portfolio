@@ -1,6 +1,6 @@
 @import "./variables.css";
 
-section{
+.liveDemoSection{
   width: 100%;
   margin-top: 150px;
   z-index: 2;
@@ -27,6 +27,7 @@ section{
 
 .predictBtn{
   width: 150px;
+  margin-top: 0px;
 }
 /* Live Demo Bölümü Düzenleme */
 .demo {

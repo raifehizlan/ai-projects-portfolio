@@ -7,7 +7,7 @@ body {
   }
   
   .container {
-    background-color: #fbfbfe; /* HTML'deki gibi */
+    background-color: white; /* HTML'deki gibi */
     min-height: 100vh;
     display: flex;
     flex-direction: column;

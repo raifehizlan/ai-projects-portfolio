@@ -45,7 +45,7 @@ const LiveDemo = ({
   };
 
   return (
-    <section>
+    <section className="liveDemoSection">
       <h2>⚡ Try It Yourself</h2>
       <div className="demo">
         {/* Input */}
