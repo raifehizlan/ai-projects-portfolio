@@ -1,22 +1,29 @@
-import React from 'react';
-import './About.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMessage } from '@fortawesome/free-solid-svg-icons';
+import React from "react";
+import "./About.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMessage } from "@fortawesome/free-solid-svg-icons";
 
 function About() {
   return (
     <div className="about" id="about">
       <h1>About</h1>
+      <p className="ptop">
+        I’m a passionate AI Engineer with a strong foundation in Machine
+        Learning and Natural Language Processing. My main focus is building
+        end-to-end solutions that help machines understand and interact with
+        human language.{" "}
+      </p>
       <p>
-        I am a passionate Artificial Intelligence (AI) Engineer dedicated to
-        solving complex challenges using modern technologies. With a strong
-        background in Machine Learning and Artificial Intelligence, I specialize
-        in developing innovative solutions that enable computers to understand
-        and interact with human language. Furthermore, I am an expert in
-        designing and building effective Continuous Integration and Delivery
-        (CI/CD) pipelines, containerization, orchestration, monitoring,
-        infrastructure automation tools, configuration management tools, as well
-        as AWS/Azure solutions.
+        Over time, I’ve expanded my expertise into DevOps and Cloud
+        technologies, allowing me to not only develop intelligent systems but
+        also deploy and manage them efficiently in production. I enjoy working
+        with CI/CD pipelines, containerization (Docker), orchestration, and
+        tools like Azure and AWS.
+      </p>
+      <p className="pbottom">
+        I love creating real-world applications fromS scratch — from data and
+        models to backend APIs, frontend interfaces, and scalable
+        infrastructure.
       </p>
       <div className="aboutExp">
         <div className="aboutExpYears">

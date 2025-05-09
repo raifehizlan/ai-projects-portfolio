@@ -75,7 +75,7 @@ const ExampleDemo = ({
 
   return (
     <section className="examples">
-      <h2>Sample Input & Predicted Output</h2>
+      <h2 className="demoTitle">Sample Input & Predicted Output</h2>
       <div className="examplesDemo">
         <button
           className={`examplesDemoButton ${activeDemo === 0 ? "active" : ""}`}
@@ -94,7 +94,7 @@ const ExampleDemo = ({
       <div className="demo">
         <div className="input-container">
           <label className="result-label">Original Text</label>
-          <div className="masked-output">
+          <div className="example-input">
             <span
               onClick={handleCopy}
               className="copy-icon"
@@ -110,7 +110,7 @@ const ExampleDemo = ({
 
         <div className="result-container">
           <label className="result-label">Predict Result</label>
-          {renderPredictionResult()}
+          <div className="example-output">{renderPredictionResult()}</div>
         </div>
       </div>
     </section>

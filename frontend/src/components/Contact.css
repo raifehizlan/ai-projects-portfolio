@@ -30,7 +30,7 @@
   .contact-form {
     width: 100%;
     max-width: 600px;
-    background: #F0F0F2;
+    background: var(--color-acik);
     padding: 2rem;
     border-radius: 16px;
     box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.1);
@@ -40,7 +40,7 @@
     font-size: 1.75rem;
     margin-bottom: 1.5rem;
     text-align: center;
-    color: #5A45C7;
+    color: var(--color-primary);
   }
   
   .form-group {
@@ -51,7 +51,7 @@
   
   .form-group label {
     font-size: 1rem;
-    color: #374151;
+    color: var(--color-primary);
     margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
@@ -59,7 +59,7 @@
   }
   
   .form-icon {
-    color: #5A45C7;
+    color:var(--color-primary);
   }
   
   input,
@@ -79,9 +79,12 @@
   }
   
   button {
-    width: 100%;
+    display: flex;    
+    text-align: center;
+    justify-content: center;
+    width: 30%;
     padding: 0.75rem 1rem;
-    background:  #5A45C7;
+    background:  var(--color-primary);
     color: white;
     font-size: 1.2rem;
     font-weight: bold;
@@ -93,7 +96,7 @@
   }
   
   button:hover {
-    background: #4338ca;
+    background: var(--color-accent);
     transform: translateY(-2px);
   }
   

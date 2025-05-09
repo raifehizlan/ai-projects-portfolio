@@ -1,4 +1,5 @@
 #home {
+  margin-top: 40px;
   display: flex;
   padding: 5% 10%; /* Dikey boşluğu azalttım */
   align-items: center; /* Dikeyde ortalama */

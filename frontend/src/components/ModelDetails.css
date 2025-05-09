@@ -1,12 +1,4 @@
-h1, h2 {
-    font-size: 1.4rem;
-    color: var(--primary-color);
-    margin: 1dvh;
-    margin-bottom: 2rem;
-    text-align: center;
 
-    
-  }
   
   section {
     background-color: white;
@@ -20,7 +12,12 @@ h1, h2 {
     text-align: justify;
   }
 
-  .intro h1{
+  .introh1 {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    text-align: center;
     padding-top: 0rem;
-    margin-top:0rem
+    margin-top:0rem !important;
+    margin-bottom:30px;
+
   }

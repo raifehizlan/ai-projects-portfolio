@@ -53,7 +53,7 @@ const LiveDemo = ({
           <label htmlFor="textInput" className="input-label">
             Enter Text
           </label>
-          <div className="textarea">
+          <div className="inputarea">
             <textarea
               id="textInput"
               value={inputText}
@@ -61,7 +61,9 @@ const LiveDemo = ({
               placeholder="Type your medical text here..."
             />
           </div>
-          <button onClick={onSubmit}>Predict</button>
+          <button className="predictBtn" onClick={onSubmit}>
+            Predict
+          </button>
         </div>
 
         {/* Output */}

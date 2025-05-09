@@ -1,6 +1,5 @@
 import React from 'react';
-import classNames from 'classnames';
-import "./MaskedText.css"
+import classNames from "classnames";
 
 const entityStyles = {
   AGE: { backgroundColor: "#e0f2fe", color: "#0284c7" }, // Mavi tonları
@@ -63,37 +62,47 @@ const entityStyles = {
 
 const MaskedText = ({ parsedData }) => {
   return (
-    <div className="flex flex-wrap gap-1 mt-4 text-base leading-relaxed">
+    <>
       {parsedData.map((part, index) => {
-        if (part.type === 'text') {
-          return <span key={index} style={{
-              textAlign: "justify", // Metni justify yapıyoruz
-              lineHeight: '40px',
-            }}>{part.value}</span>;
+        if (part.type === "text") {
+          return (
+            <span
+              key={index}
+              style={{
+                textAlign: "justify", // Metni justify yapıyoruz
+                lineHeight: "40px",
+              }}
+            >
+              {part.value}
+            </span>
+          );
         }
 
         // Burada entity label'ına göre renkleri alıyoruz
-        const style = entityStyles[part.label] || { backgroundColor: '#e5e5e5', color: '#333' , }; // Varsayılan gri renk
+        const style = entityStyles[part.label] || {
+          backgroundColor: "#e5e5e5",
+          color: "#333",
+        }; // Varsayılan gri renk
 
         return (
           <span
             key={index}
             style={{
               ...style,
-              lineHeight: '40px',
-              padding: '4px 8px',
-              borderRadius: '4px',
-              fontWeight: '600',
-              marginRight: '8px', // Text ve label arasına boşluk eklemek için
+              lineHeight: "40px",
+              padding: "4px 8px",
+              borderRadius: "4px",
+              fontWeight: "600",
+              marginRight: "8px", // Text ve label arasına boşluk eklemek için
               textAlign: "justify", // Metni justify yapıyoruz
             }}
           >
             {part.value}
             <span
               style={{
-                fontSize: '12px',
-                color: '#6b7280',
-                marginLeft: '4px', 
+                fontSize: "12px",
+                color: "#6b7280",
+                marginLeft: "4px",
                 textAlign: "justify", // Label'ı da justify hizalayabiliriz
               }}
             >
@@ -102,7 +111,7 @@ const MaskedText = ({ parsedData }) => {
           </span>
         );
       })}
-    </div>
+    </>
   );
 };
 

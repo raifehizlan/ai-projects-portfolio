@@ -30,7 +30,7 @@
   
   .research-item h3 {
     font-size: 1.5rem;
-    color: #5A45C7;
+    color: var(--color-primary);
     margin-bottom: 0.8rem;
   }
   

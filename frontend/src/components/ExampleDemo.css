@@ -1,3 +1,8 @@
+.examples{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .examplesDemo{
     display: flex;
     flex-direction: column;
@@ -6,7 +11,7 @@
 /* Deid2.css */
 .examplesDemoButton{
   
-  background-color:var(--primary-color);
+  background-color:#707680;
   color: white;
   border: none;
   border-radius: 4px;
@@ -22,10 +27,25 @@
   align-items: center;
 }
 .active {
-  background-color: #3718d6;
+  background-color: var(--color-primary);
 }
-
-
+.demoTitle{
+  padding-top: 50px;
+}
+.example-input{
+  flex: 1;
+  height: 500px;
+  width:100%;
+  padding: 1rem;
+  background-color: #f5f7fa;
+  border-radius: 8px;
+  border: 1px solid #d6d9dc;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size: 1rem;
+  line-height: 1.6;
+}
 /* Live Demo Bölümü Düzenleme */
 .demo {
   display: flex;
@@ -60,65 +80,18 @@
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
   padding: 2rem;
-  min-height: 300px;
-  width: 50%;
+  min-height: 500px;
+  max-height: 500px;
+  width: 500%;
 }
 
 /* Etiketler */
 .input-label,
 .result-label {
   font-weight: bold;
-  margin-bottom: 0.5rem;
 }
 
-/* Textarea dış sarıcı */
-.demo .textarea {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
 
-/* Textarea alanı */
-.demo textarea {
-  flex: 1;
-  resize: vertical;
-  min-height: 300px;
-  max-height: 100%;
-  padding: 1rem;
-  font-size: 1rem;
-  border: 1px solid #d6d9dc;
-  border-radius: 8px;
-  background-color: #fafbfd;
-  color: #333;
-  line-height: 1.6;
-  box-sizing: border-box;
-  overflow-y: auto;
-}
-
-.demo textarea {
-  outline : var(--primary-color);
-  outline: none;
-}
-
-/* Masked output div */
-.demo .masked-output {
-  position: relative;
-  min-height: 300px;
-  max-height: 100%;
-  padding: 1rem;
-  background-color: #f5f7fa;
-  border-radius: 8px;
-  border: 1px solid #d6d9dc;
-  overflow-y: auto;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
-
-/* Predict ve toggle butonları */
 
 .copy-icon {
   all: unset; /* Bu, tüm varsayılan stilleri sıfırlar */

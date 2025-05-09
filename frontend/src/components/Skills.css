@@ -32,8 +32,8 @@
 .skill-category h3 {
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
-  color: #5A45C7; /* Canlı mavi */
-  border-bottom: 3px solid #5A45C7;
+  color: var(--color-primary); /* Canlı mavi */
+  border-bottom: 3px solid var(--color-primary);
   padding-bottom: 0.75rem;
   font-weight: 600;
 }
@@ -48,7 +48,7 @@
 }
 
 .skill-category li {
-  background: #ecf0f1; /* Çok açık gri */
+  background:var(--color-surface); /* Çok açık gri */
   padding: 1rem 1.5rem;
   border-radius: 16px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
@@ -56,7 +56,7 @@
   align-items: center;
   gap: 1rem;
   font-weight: 500;
-  color: #2c3e50;
+  color: var(--color-primary);
   transition: all 0.3s ease;
   cursor: default;
   border: 1px solid transparent;
@@ -71,7 +71,7 @@
 
 .skill-icon {
   font-size: 2rem;
-  color: #8e44ad; /* Mor */
+  color:var(--color-primary); /* Mor */
 }
 
 /* Responsive Düzen */

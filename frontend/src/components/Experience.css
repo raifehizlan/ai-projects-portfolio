@@ -5,13 +5,13 @@
   
   .experience h1 {
     font-size: 2rem;
-    color: #222;
+    color:  var(--color-primary);
     margin-bottom: 0.5rem;
     text-align: center;
   }
   
   .experience p {
-    color: #777;
+    color:  var(--color-primary);
     text-align: center;
     margin-bottom: 2rem;
   }
@@ -36,7 +36,7 @@
   }
   
   .tab.active {
-    background: #5A45C7;
+    background: var(--color-primary);
     color: white;
   }
   
@@ -46,7 +46,7 @@
   
   .timeline {
     display: none;
-    border-left: 1px solid #5A45C7;
+    border-left: 0.5px solid var(--color-primary);
     padding-left: 3px;
     margin-top: 0.2rem;
   }
@@ -60,7 +60,7 @@
     padding: 15px;
     margin: 15px 0;
     border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   }
   
   .event h3 {

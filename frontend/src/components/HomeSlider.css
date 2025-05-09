@@ -1,0 +1,72 @@
+.slider-container {
+    max-width: 1000px;
+    width: 90%; /* Daha iyi responsive'lik için */
+    margin: 2rem auto;
+    padding: 2rem 1rem;
+  }
+  
+  .slide {
+    background: #ffff; /* Hafif gri arka plan 
+    */
+    height: 200px;
+    border-radius: 12px; /* Biraz daha az yuvarlak köşe */
+    padding: 3rem 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25); /* Daha zarif gölge */
+    border: 1px solid #e0e0e0; /* İsteğe bağlı ince kenarlık */
+  }
+  
+  .slide-content {
+    text-align: center;
+    padding-right: 50px;
+  }
+  
+  .slide h2 {
+    font-size: 2.2rem; /* Biraz daha büyük başlık */
+    color: #1e3a8a;
+    margin-bottom: 1.2rem;
+    font-weight: 600; /* Biraz daha az kalın */
+    line-height: 1.3;
+  }
+  
+  .slide p {
+    text-align: center;
+    font-size: 1.15rem; /* Biraz daha büyük metin */
+    color: #4a5568; /* Biraz daha koyu gri */
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6; /* Daha iyi okunabilirlik için satır yüksekliği */
+  }
+  .slideParagraph{
+    display: flex;
+    flex-wrap: nowrap;
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .slick-prev:before,
+  .slick-next:before {
+    color: #1e3a8a;
+    font-size: 24px; /* Biraz daha küçük oklar */
+    opacity: 0.8; /* Biraz daha az belirgin */
+  }
+  
+  .slick-dots {
+    bottom: 20px;
+    text-align: center;
+  }
+  
+  .slick-dots li {
+    margin: 0 6px;
+  }
+  
+  .slick-dots li button:before {
+    font-size: 10px;
+    color: #ccc;
+    opacity: 0.7;
+  }
+  
+  .slick-dots li.slick-active button:before {
+    font-size: 12px;
+    color: #1e3a8a;
+    opacity: 1;
+  }

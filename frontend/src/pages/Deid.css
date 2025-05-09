@@ -1,10 +1,10 @@
 :root {
-    --primary-color:#6D5BD8;
+    --primary-color:#1e293b;
     --background-color: #f9fbfd;
     --border-color: #e0e0e0;
     --text-color: #333;
     --light-text: #777;
-    --entity-bg: #e3f2fd;
+    --entity-bg: #e3f3fd;
     --entity-color: #0d47a1;
     --font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
@@ -19,13 +19,10 @@
   
   .deid-container {
     max-width: 90%;
-    margin: auto;
-    margin-top: 40px;
+    margin-top: 110px;
     padding: 3rem 1.5rem;
   }
 
-h1{
+.deid-container h1:first-child{
   text-align: center;
-  margin-top: 70px;
-  margin-bottom: 30px;
 }

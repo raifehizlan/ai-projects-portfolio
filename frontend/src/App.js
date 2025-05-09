@@ -25,6 +25,7 @@ import DeidMarkdown from "./pages/DeidMarkdown";
 import Classification from "./pages/Classification";
 import Assertion from "./pages/AssertionStatus";
 import RelExtraction from "./pages/RelExtraction";
+import HomeSlider from "./components/HomeSlider";
 // Proje ID'ye göre uygun bileşeni döndüren yardımcı fonksiyon
 function ProjectDetail() {
   const { id } = useParams();
@@ -74,6 +75,7 @@ function Layout() {
               <Experience />
               <Projects />
               <Research />
+              <HomeSlider />
               <Skills />
               <Contact />
             </>

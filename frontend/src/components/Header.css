@@ -1,3 +1,6 @@
+@import "./variables.css";
+
+
 body, html {
   margin: 0;
   padding: 0;
@@ -11,7 +14,7 @@ header {
   left: 0; /* Sol kenara sabitlemek için (genellikle gereklidir) */
   width: 100%; /* Genellikle tam genişlik istenir */ 
   height: auto;
-  background-color: #e9e9f7;
+  background-color:#1e293b;
   z-index: 100;
 }
 
@@ -42,7 +45,7 @@ header {
   padding: 0.7rem 1.2rem;
   font-size: 1.1rem;
   text-decoration: none;
-  color: #333;
+  color: var(--color-acik);
   transition: color 0.3s ease-in-out;
   display: flex;
   align-items: center;
@@ -68,7 +71,7 @@ header {
   position: absolute;
   right: 1.5rem;
   top: 1.2rem;
-  color: #333;
+  color:  var(--color-acik);
   z-index: 200;
 
 }
@@ -89,7 +92,7 @@ header {
     position: absolute;
     top: 100%;
     right: 2rem;
-    background-color: #e9e9f7;
+    background-color: var(--color-primary);
     padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
