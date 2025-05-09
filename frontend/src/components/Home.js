@@ -14,7 +14,8 @@ function Home() {
       <div className="homeText">
         <h1>Hi, I'm Raife Hizlan</h1> {/* Adınızı güncelledim */}
         <h3>💻 🧠 ❤️</h3> {/* İlgi alanlarınıza göre güncelleyebilirsiniz */}
-        <p>Full Stack AI Engineer</p> {/* Unvanınızı güncelledim */}
+        <p>Full Stack AI Engineer | DevOps & Cloud Enthusiast</p>{" "}
+        {/* Unvanınızı güncelledim */}
       </div>
       <div className="homeImage">
         <img src={ProfileImage} alt="" />
