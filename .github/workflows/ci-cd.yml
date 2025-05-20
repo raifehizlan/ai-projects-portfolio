@@ -110,8 +110,7 @@ jobs:
           az containerapp update \
             --name backend \
             --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
-            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:latest \
-            --environment ${{ env.AZURE_CONTAINERAPPS_ENVIRONMENT }}
+            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:latest 
 
   build-deid:
     runs-on: ubuntu-latest
