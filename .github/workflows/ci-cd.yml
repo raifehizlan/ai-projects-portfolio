@@ -16,36 +16,34 @@ jobs:
       run:
         working-directory: ./frontend
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code with depth 2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 2
 
       - name: Check frontend changes
-        id: frontend_check
+        id: check
         run: |
-          if [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
+          if [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
             echo "changed=true" >> $GITHUB_OUTPUT
           else
             changes=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^frontend/' || true)
-            if [ -z "$changes" ]; then
+            if [[ -z "$changes" ]]; then
               echo "changed=false" >> $GITHUB_OUTPUT
             else
               echo "changed=true" >> $GITHUB_OUTPUT
             fi
           fi
 
-      - name: Login to Azure Container Registry
-        if: steps.frontend_check.outputs.changed == 'true'
+      - name: Login to ACR
+        if: steps.check.outputs.changed == 'true'
         run: echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }} --password-stdin
 
-      - name: Build Frontend Image
-        if: steps.frontend_check.outputs.changed == 'true'
-        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/frontend:latest .
-
-      - name: Push Frontend Image
-        if: steps.frontend_check.outputs.changed == 'true'
-        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/frontend:latest
-
+      - name: Build and push frontend image
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/frontend:latest .
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/frontend:latest
 
   build-backend:
     runs-on: ubuntu-latest
@@ -53,36 +51,34 @@ jobs:
       run:
         working-directory: ./backend
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code with depth 2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 2
 
       - name: Check backend changes
-        id: backend_check
+        id: check
         run: |
-          if [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
+          if [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
             echo "changed=true" >> $GITHUB_OUTPUT
           else
             changes=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^backend/' || true)
-            if [ -z "$changes" ]; then
+            if [[ -z "$changes" ]]; then
               echo "changed=false" >> $GITHUB_OUTPUT
             else
               echo "changed=true" >> $GITHUB_OUTPUT
             fi
           fi
 
-      - name: Login to Azure Container Registry
-        if: steps.backend_check.outputs.changed == 'true'
+      - name: Login to ACR
+        if: steps.check.outputs.changed == 'true'
         run: echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }} --password-stdin
 
-      - name: Build Backend Image
-        if: steps.backend_check.outputs.changed == 'true'
-        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:latest .
-
-      - name: Push Backend Image
-        if: steps.backend_check.outputs.changed == 'true'
-        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:latest
-
+      - name: Build and push backend image
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:latest .
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:latest
 
   build-deid:
     runs-on: ubuntu-latest
@@ -90,36 +86,34 @@ jobs:
       run:
         working-directory: ./ml_models/model_deid
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code with depth 2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 2
 
       - name: Check deid changes
-        id: deid_check
+        id: check
         run: |
-          if [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
+          if [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
             echo "changed=true" >> $GITHUB_OUTPUT
           else
             changes=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^ml_models/model_deid/' || true)
-            if [ -z "$changes" ]; then
+            if [[ -z "$changes" ]]; then
               echo "changed=false" >> $GITHUB_OUTPUT
             else
               echo "changed=true" >> $GITHUB_OUTPUT
             fi
           fi
 
-      - name: Login to Azure Container Registry
-        if: steps.deid_check.outputs.changed == 'true'
+      - name: Login to ACR
+        if: steps.check.outputs.changed == 'true'
         run: echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }} --password-stdin
 
-      - name: Build Deid Image
-        if: steps.deid_check.outputs.changed == 'true'
-        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-deid:latest .
-
-      - name: Push Deid Image
-        if: steps.deid_check.outputs.changed == 'true'
-        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-deid:latest
-
+      - name: Build and push deid image
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-deid:latest .
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-deid:latest
 
   build-ner:
     runs-on: ubuntu-latest
@@ -127,36 +121,34 @@ jobs:
       run:
         working-directory: ./ml_models/model_ner
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code with depth 2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 2
 
       - name: Check ner changes
-        id: ner_check
+        id: check
         run: |
-          if [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
+          if [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
             echo "changed=true" >> $GITHUB_OUTPUT
           else
             changes=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^ml_models/model_ner/' || true)
-            if [ -z "$changes" ]; then
+            if [[ -z "$changes" ]]; then
               echo "changed=false" >> $GITHUB_OUTPUT
             else
               echo "changed=true" >> $GITHUB_OUTPUT
             fi
           fi
 
-      - name: Login to Azure Container Registry
-        if: steps.ner_check.outputs.changed == 'true'
+      - name: Login to ACR
+        if: steps.check.outputs.changed == 'true'
         run: echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }} --password-stdin
 
-      - name: Build NER Image
-        if: steps.ner_check.outputs.changed == 'true'
-        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-ner:latest .
-
-      - name: Push NER Image
-        if: steps.ner_check.outputs.changed == 'true'
-        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-ner:latest
-
+      - name: Build and push ner image
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-ner:latest .
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-ner:latest
 
   build-assertion:
     runs-on: ubuntu-latest
@@ -164,36 +156,34 @@ jobs:
       run:
         working-directory: ./ml_models/model_assertion
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code with depth 2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 2
 
       - name: Check assertion changes
-        id: assertion_check
+        id: check
         run: |
-          if [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
+          if [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
             echo "changed=true" >> $GITHUB_OUTPUT
           else
             changes=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^ml_models/model_assertion/' || true)
-            if [ -z "$changes" ]; then
+            if [[ -z "$changes" ]]; then
               echo "changed=false" >> $GITHUB_OUTPUT
             else
               echo "changed=true" >> $GITHUB_OUTPUT
             fi
           fi
 
-      - name: Login to Azure Container Registry
-        if: steps.assertion_check.outputs.changed == 'true'
+      - name: Login to ACR
+        if: steps.check.outputs.changed == 'true'
         run: echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }} --password-stdin
 
-      - name: Build Assertion Image
-        if: steps.assertion_check.outputs.changed == 'true'
-        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-assertion:latest .
-
-      - name: Push Assertion Image
-        if: steps.assertion_check.outputs.changed == 'true'
-        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-assertion:latest
-
+      - name: Build and push assertion image
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-assertion:latest .
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-assertion:latest
 
   build-relation:
     runs-on: ubuntu-latest
@@ -201,24 +191,66 @@ jobs:
       run:
         working-directory: ./ml_models/model_relation
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code with depth 2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 2
 
       - name: Check relation changes
-        id: relation_check
+        id: check
         run: |
-          if [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
+          if [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
             echo "changed=true" >> $GITHUB_OUTPUT
           else
             changes=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^ml_models/model_relation/' || true)
-            if [ -z "$changes" ]; then
+            if [[ -z "$changes" ]]; then
               echo "changed=false" >> $GITHUB_OUTPUT
             else
               echo "changed=true" >> $GITHUB_OUTPUT
             fi
           fi
 
-      - name: Login to Azure Container Registry
-        if: steps.relation_check.outputs.changed == 'true'
-        run: echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME
+      - name: Login to ACR
+        if: steps.check.outputs.changed == 'true'
+        run: echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }} --password-stdin
+
+      - name: Build and push relation image
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-relation:latest .
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-relation:latest
+
+  build-classification:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ml_models/model_cls
+    steps:
+      - name: Checkout code with depth 2
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Check classification changes
+        id: check
+        run: |
+          if [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            changes=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^ml_models/model_cls/' || true)
+            if [[ -z "$changes" ]]; then
+              echo "changed=false" >> $GITHUB_OUTPUT
+            else
+              echo "changed=true" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+      - name: Login to ACR
+        if: steps.check.outputs.changed == 'true'
+        run: echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }} --password-stdin
+
+      - name: Build and push classification image
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-classification:latest .
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-classification:latest
