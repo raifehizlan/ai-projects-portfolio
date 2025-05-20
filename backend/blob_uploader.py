@@ -4,7 +4,6 @@ import os
 import json
 import uuid
 from datetime import datetime
-from decouple import config 
 
 AZURE_STORAGE_CONNECTION_STRING=os.environ.get("AZURE_STORAGE_CONNECTION_STRING")
 AZURE_BLOB_CONTAINER_NAME=os.environ.get("AZURE_BLOB_CONTAINER_NAME")
