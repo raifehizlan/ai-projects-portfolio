@@ -16,18 +16,22 @@ jobs:
       run:
         working-directory: ./frontend
     steps:
-      - name: Checkout code with depth 2
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 2
 
       - name: Check frontend changes
         id: check
         run: |
+          echo "Before commit: ${{ github.event.before }}"
+          echo "After commit: ${{ github.sha }}"
+          
           if [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
             echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Initial commit or unknown, forcing build"
           else
             changes=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^frontend/' || true)
+            echo "Changed files in frontend: $changes"
             if [[ -z "$changes" ]]; then
               echo "changed=false" >> $GITHUB_OUTPUT
             else
