@@ -18,7 +18,7 @@ DAILY_PREDICTION_LIMIT=int(config("DAILY_PREDICTION_LIMIT"))
 app = FastAPI()
 
 model_endpoints = {
-    "deid": "https://model-deid.internal.redwater-2caf4374.switzerlandnorth.azurecontainerapps.io:8000/predict",
+    "deid": "https://model-deid:8000/predict",
     "ner": "http://ner-service:8000/predict",
     "assertion": "http://as-service:8000/predict",
     "relation": "http://rel-service:8000/predict",
