@@ -4,16 +4,16 @@ from pydantic import BaseModel
 from typing import Dict,List
 import json
 import uuid
+import os
 from datetime import datetime
 from azure.storage.blob import BlobServiceClient
 import httpx  # HTTP istekleri için
 from azure_table_storage import update_prediction_count, get_daily_prediction_count  # Azure Table Storage fonksiyonlarını ekledim
-from decouple import config
 from blob_uploader import upload_json_to_azure
 
-AZURE_STORAGE_CONNECTION_STRING = config("AZURE_STORAGE_CONNECTION_STRING")
-AZURE_BLOB_CONTAINER_NAME=config("AZURE_BLOB_CONTAINER_NAME")
-DAILY_PREDICTION_LIMIT=int(config("DAILY_PREDICTION_LIMIT"))
+AZURE_STORAGE_CONNECTION_STRING = os.environ.get("AZURE_STORAGE_CONNECTION_STRING")
+AZURE_BLOB_CONTAINER_NAME=os.environ.get("AZURE_BLOB_CONTAINER_NAME")
+DAILY_PREDICTION_LIMIT=10
 
 app = FastAPI()
 
