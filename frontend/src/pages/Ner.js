@@ -49,11 +49,14 @@ const Ner = () => {
       localStorage.setItem("user_id", userId);
     }
     try {
-      const res = await axios.post("http://localhost:8000/predict", {
-        user_id: userId,
-        model: "ner",
-        text: [inputText],
-      });
+      const res = await axios.post(
+        "https://backend.internal.redwater-2caf4374.switzerlandnorth.azurecontainerapps.io:8000/predict",
+        {
+          user_id: userId,
+          model: "ner",
+          text: [inputText],
+        }
+      );
       const predictionOutput = res.data.output[0];
       setResult(predictionOutput);
       setParsedResult(parseMaskedText(inputText, predictionOutput));

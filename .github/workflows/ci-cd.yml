@@ -63,6 +63,21 @@ jobs:
           docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/frontend:latest .
           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/frontend:latest
 
+
+      - name: Azure Login
+        if: steps.check.outputs.changed == 'true'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Update Azure Container App with new backend image
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          az containerapp update \
+            --name frontend-app \
+            --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
+            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/frontend:latest 
+
   build-backend:
     runs-on: ubuntu-latest
     defaults:
@@ -146,6 +161,21 @@ jobs:
         run: |
           docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-deid:latest .
           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-deid:latest
+
+
+      - name: Azure Login
+        if: steps.check.outputs.changed == 'true'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Update Azure Container App with new backend image
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          az containerapp update \
+            --name model-deid \
+            --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
+            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-deid:latest 
 
   build-ner:
     runs-on: ubuntu-latest
