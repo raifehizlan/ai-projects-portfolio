@@ -70,7 +70,7 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Update Azure Container App with new backend image
+      - name: Update Azure Container App with new frontend image
         if: steps.check.outputs.changed == 'true'
         run: |
           az containerapp update \
@@ -169,7 +169,7 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Update Azure Container App with new backend image
+      - name: Update Azure Container App with new model-deid image
         if: steps.check.outputs.changed == 'true'
         run: |
           az containerapp update \
