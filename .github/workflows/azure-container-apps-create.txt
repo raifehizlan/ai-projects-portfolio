@@ -1,0 +1,21 @@
+-----FRONTEND----
+az containerapp create \
+  --name frontend-app \
+  --resource-group portfolioProject \
+  --environment mlplatform-env \
+  --image myportfolioacrraife.azurecr.io/myportfolioacrraife/frontend:latest \
+  --target-port 8000 \
+  --ingress external \
+  --registry-server myportfolioacrraife.azurecr.io \
+  --registry-username <ACR_USERNAME> \
+  --registry-password <ACR_PASSWORD> \
+  --cpu 0.25 \
+  --memory 0.5Gi
+  --min-replicas 0 \
+  --max-replicas 3 \
+  --scale-rule-name httpautoscale \
+  --scale-rule-type http \
+  --scale-rule-authentication-mode none \
+  --scale-rule-http-concurrency 80
+
+
