@@ -10,7 +10,6 @@ env:
   IMAGE_OWNER: myportfolioacrraife
 
 jobs:
-
   build-frontend:
     runs-on: ubuntu-latest
     defaults:
@@ -18,23 +17,35 @@ jobs:
         working-directory: ./frontend
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
 
       - name: Check frontend changes
         id: frontend_check
         run: |
-          echo "changed=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^frontend/' || true)" >> $GITHUB_OUTPUT
+          if [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            changes=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^frontend/' || true)
+            if [ -z "$changes" ]; then
+              echo "changed=false" >> $GITHUB_OUTPUT
+            else
+              echo "changed=true" >> $GITHUB_OUTPUT
+            fi
+          fi
 
       - name: Login to Azure Container Registry
-        if: steps.frontend_check.outputs.changed != ''
+        if: steps.frontend_check.outputs.changed == 'true'
         run: echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }} --password-stdin
 
       - name: Build Frontend Image
-        if: steps.frontend_check.outputs.changed != ''
+        if: steps.frontend_check.outputs.changed == 'true'
         run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/frontend:latest .
 
       - name: Push Frontend Image
-        if: steps.frontend_check.outputs.changed != ''
+        if: steps.frontend_check.outputs.changed == 'true'
         run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/frontend:latest
+
 
   build-backend:
     runs-on: ubuntu-latest
@@ -43,23 +54,35 @@ jobs:
         working-directory: ./backend
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
 
       - name: Check backend changes
         id: backend_check
         run: |
-          echo "changed=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^backend/' || true)" >> $GITHUB_OUTPUT
+          if [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            changes=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^backend/' || true)
+            if [ -z "$changes" ]; then
+              echo "changed=false" >> $GITHUB_OUTPUT
+            else
+              echo "changed=true" >> $GITHUB_OUTPUT
+            fi
+          fi
 
       - name: Login to Azure Container Registry
-        if: steps.backend_check.outputs.changed != ''
+        if: steps.backend_check.outputs.changed == 'true'
         run: echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }} --password-stdin
 
       - name: Build Backend Image
-        if: steps.backend_check.outputs.changed != ''
+        if: steps.backend_check.outputs.changed == 'true'
         run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:latest .
 
       - name: Push Backend Image
-        if: steps.backend_check.outputs.changed != ''
+        if: steps.backend_check.outputs.changed == 'true'
         run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:latest
+
 
   build-deid:
     runs-on: ubuntu-latest
@@ -68,23 +91,35 @@ jobs:
         working-directory: ./ml_models/model_deid
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
 
       - name: Check deid changes
         id: deid_check
         run: |
-          echo "changed=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^ml_models/model_deid/' || true)" >> $GITHUB_OUTPUT
+          if [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            changes=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^ml_models/model_deid/' || true)
+            if [ -z "$changes" ]; then
+              echo "changed=false" >> $GITHUB_OUTPUT
+            else
+              echo "changed=true" >> $GITHUB_OUTPUT
+            fi
+          fi
 
       - name: Login to Azure Container Registry
-        if: steps.deid_check.outputs.changed != ''
+        if: steps.deid_check.outputs.changed == 'true'
         run: echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }} --password-stdin
 
       - name: Build Deid Image
-        if: steps.deid_check.outputs.changed != ''
+        if: steps.deid_check.outputs.changed == 'true'
         run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-deid:latest .
 
       - name: Push Deid Image
-        if: steps.deid_check.outputs.changed != ''
+        if: steps.deid_check.outputs.changed == 'true'
         run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-deid:latest
+
 
   build-ner:
     runs-on: ubuntu-latest
@@ -93,23 +128,35 @@ jobs:
         working-directory: ./ml_models/model_ner
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
 
       - name: Check ner changes
         id: ner_check
         run: |
-          echo "changed=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^ml_models/model_ner/' || true)" >> $GITHUB_OUTPUT
+          if [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            changes=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^ml_models/model_ner/' || true)
+            if [ -z "$changes" ]; then
+              echo "changed=false" >> $GITHUB_OUTPUT
+            else
+              echo "changed=true" >> $GITHUB_OUTPUT
+            fi
+          fi
 
       - name: Login to Azure Container Registry
-        if: steps.ner_check.outputs.changed != ''
+        if: steps.ner_check.outputs.changed == 'true'
         run: echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }} --password-stdin
 
       - name: Build NER Image
-        if: steps.ner_check.outputs.changed != ''
+        if: steps.ner_check.outputs.changed == 'true'
         run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-ner:latest .
 
       - name: Push NER Image
-        if: steps.ner_check.outputs.changed != ''
+        if: steps.ner_check.outputs.changed == 'true'
         run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-ner:latest
+
 
   build-assertion:
     runs-on: ubuntu-latest
@@ -118,23 +165,35 @@ jobs:
         working-directory: ./ml_models/model_assertion
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
 
       - name: Check assertion changes
         id: assertion_check
         run: |
-          echo "changed=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^ml_models/model_assertion/' || true)" >> $GITHUB_OUTPUT
+          if [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            changes=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^ml_models/model_assertion/' || true)
+            if [ -z "$changes" ]; then
+              echo "changed=false" >> $GITHUB_OUTPUT
+            else
+              echo "changed=true" >> $GITHUB_OUTPUT
+            fi
+          fi
 
       - name: Login to Azure Container Registry
-        if: steps.assertion_check.outputs.changed != ''
+        if: steps.assertion_check.outputs.changed == 'true'
         run: echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }} --password-stdin
 
       - name: Build Assertion Image
-        if: steps.assertion_check.outputs.changed != ''
+        if: steps.assertion_check.outputs.changed == 'true'
         run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-assertion:latest .
 
       - name: Push Assertion Image
-        if: steps.assertion_check.outputs.changed != ''
+        if: steps.assertion_check.outputs.changed == 'true'
         run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-assertion:latest
+
 
   build-relation:
     runs-on: ubuntu-latest
@@ -143,45 +202,23 @@ jobs:
         working-directory: ./ml_models/model_relation
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
 
       - name: Check relation changes
         id: relation_check
         run: |
-          echo "changed=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^ml_models/model_relation/' || true)" >> $GITHUB_OUTPUT
+          if [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            changes=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^ml_models/model_relation/' || true)
+            if [ -z "$changes" ]; then
+              echo "changed=false" >> $GITHUB_OUTPUT
+            else
+              echo "changed=true" >> $GITHUB_OUTPUT
+            fi
+          fi
 
       - name: Login to Azure Container Registry
-        if: steps.relation_check.outputs.changed != ''
-        run: echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }} --password-stdin
-
-      - name: Build Relation Image
-        if: steps.relation_check.outputs.changed != ''
-        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-relation:latest .
-
-      - name: Push Relation Image
-        if: steps.relation_check.outputs.changed != ''
-        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-relation:latest
-
-  build-classification:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./ml_models/model_cls
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Check classification changes
-        id: classification_check
-        run: |
-          echo "changed=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^ml_models/model_cls/' || true)" >> $GITHUB_OUTPUT
-
-      - name: Login to Azure Container Registry
-        if: steps.classification_check.outputs.changed != ''
-        run: echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }} --password-stdin
-
-      - name: Build Classification Image
-        if: steps.classification_check.outputs.changed != ''
-        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-classification:latest .
-
-      - name: Push Classification Image
-        if: steps.classification_check.outputs.changed != ''
-        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-classification:latest
+        if: steps.relation_check.outputs.changed == 'true'
+        run: echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME
