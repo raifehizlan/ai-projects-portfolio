@@ -1,0 +1,110 @@
+name: ML Platform CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  REGISTRY: myportfolioacrraife.azurecr.io
+  IMAGE_OWNER: myportfolioacrraife
+
+jobs:
+
+  build-frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login to Azure Container Registry
+        run: echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }} --password-stdin
+      - name: Build Frontend Image
+        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/frontend:latest .
+      - name: Push Frontend Image
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/frontend:latest
+
+  build-backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login to Azure Container Registry
+        run: echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }} --password-stdin
+      - name: Build Backend Image
+        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:latest .
+      - name: Push Backend Image
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:latest
+
+  build-deid:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ml_models/model_deid
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login to Azure Container Registry
+        run: echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }} --password-stdin
+      - name: Build Deid Image
+        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-deid:latest .
+      - name: Push Deid Image
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-deid:latest
+
+  build-ner:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ml_models/model_ner
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login to Azure Container Registry
+        run: echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }} --password-stdin
+      - name: Build NER Image
+        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-ner:latest .
+      - name: Push NER Image
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-ner:latest
+
+  build-assertion:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ml_models/model_assertion
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login to Azure Container Registry
+        run: echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }} --password-stdin
+      - name: Build Assertion Image
+        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-assertion:latest .
+      - name: Push Assertion Image
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-assertion:latest
+
+  build-relation:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ml_models/model_relation
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login to Azure Container Registry
+        run: echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }} --password-stdin
+      - name: Build Relation Image
+        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-relation:latest .
+      - name: Push Relation Image
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-relation:latest
+
+  build-classification:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ml_models/model_cls
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login to Azure Container Registry
+        run: echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }} --password-stdin
+      - name: Build Classification Image
+        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-classification:latest .
+      - name: Push Classification Image
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-classification:latest

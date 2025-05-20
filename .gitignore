@@ -7,31 +7,26 @@ frontend/dist/
 
 
 # ML Modeli için (eğer büyük veri dosyaları varsa)
-ml_models/model_deid/app/.env
 ml_models/model_deid/app/model_downloaded
 ml_models/model_deid/app/predict.ipynb
 ml_models/model_deid/app/FASTAPI.log
 
-ml_models/model_ner/app/.env
 ml_models/model_ner/app/model_downloaded
 ml_models/model_ner/app/deneme.ipynb
 
 ml_models/model_cls/app/FASTAPI.log
-ml_models/model_cls/app/.env
 ml_models/model_cls/app/model_downloaded
 ml_models/model_cls/app/deneme.ipynb
 
 
 
 ml_models/model_assertion/app/FASTAPI.log
-ml_models/model_assertion/app/.env
 ml_models/model_assertion/app/model_downloaded
 ml_models/model_assertion/app/deneme.ipynb
 
 
 
 ml_models/model_relation/app/FASTAPI.log
-ml_models/model_relation/app/.env
 ml_models/model_relation/app/model_downloaded
 ml_models/model_relation/app/deneme.ipynb
 
@@ -39,7 +34,6 @@ ml_models/model_relation/app/deneme.ipynb
 
 
 ml_models/model_icd10/app/FASTAPI.log
-ml_models/model_icd10/app/.env
 ml_models/model_icd10/app/model_downloaded
 ml_models/model_icd10/app/deneme.ipynb
 ml_models/model_icd10/app/__pycache__
@@ -51,7 +45,6 @@ ml_models/model_icd10/app/__pycache__
 # Backend için (Python örneği)
 backend/__pycache__/
 backend/*.pyc
-backend/.env
 backend/venv/
 backend/*.log
 backend/lesen_table.py
