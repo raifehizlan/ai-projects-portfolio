@@ -1,5 +1,5 @@
 # Python 3.11 tabanlı bir resmi imaj kullanıyoruz
-FROM python:3.9-slim
+FROM python:3.11-slim
 
 # Çalışma dizinini oluşturuyoruz
 WORKDIR /app
