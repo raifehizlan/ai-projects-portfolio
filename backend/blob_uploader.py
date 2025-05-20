@@ -6,8 +6,8 @@ import uuid
 from datetime import datetime
 from decouple import config 
 
-AZURE_STORAGE_CONNECTION_STRING=config("AZURE_STORAGE_CONNECTION_STRING")
-AZURE_BLOB_CONTAINER_NAME=config("AZURE_BLOB_CONTAINER_NAME")
+AZURE_STORAGE_CONNECTION_STRING=os.environ.get("AZURE_STORAGE_CONNECTION_STRING")
+AZURE_BLOB_CONTAINER_NAME=os.environ.get("AZURE_BLOB_CONTAINER_NAME")
 print(AZURE_BLOB_CONTAINER_NAME)
 
 def upload_json_to_azure(json_data: dict, user_id: int, model_name: str) -> str:

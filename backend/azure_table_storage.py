@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 import os
 from decouple import config
 # Azure Storage bağlantısı
-connection_string = config("AZURE_TABLE_STORAGE_CONNECTION_STRING")
+connection_string = os.environ.get("AZURE_STORAGE_CONNECTION_STRING")
 table_name = "predictionlimits"  # Table adı
 
 # Azure Table Service Client oluştur

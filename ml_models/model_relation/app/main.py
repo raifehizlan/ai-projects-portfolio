@@ -65,7 +65,7 @@ class RelationModel:
         self.device = "cpu"
         self.ready = False
         self.data_type = "data_json"
-        self.container_name = config("AZURE_STORAGE_CONTAINER")
+        self.container_name = os.environ.get("AZURE_STORAGE_CONTAINER")
         self.prefix = config("PREFIX")  # aynı şeyi kullanıyoruz
         # PATHs
         self.local_dir = os.path.abspath(__file__).replace("main.py", config("LOCAL_FOLDER"))
@@ -84,11 +84,11 @@ class RelationModel:
         self.load()
 
 
-        self.backend_url = config("BACKEND_URL", default=None)
+
 
         # Azure Model Loader ile indirme
         model_loader = AzureModelLoader(
-            connection_string=config("AZURE_STORAGE_CONNECTION_STRING"),
+            connection_string=os.environ.get("AZURE_STORAGE_CONNECTION_STRING"),
             container_name=self.container_name,
             prefix=self.prefix,
             local_dir=self.local_dir
