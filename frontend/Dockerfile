@@ -1,17 +1,22 @@
-# Temel image'ı belirle
-FROM node:16
+# --- Build Aşaması ---
+FROM node:16 AS builder
 
-# Çalışma dizini oluştur
 WORKDIR /app
-
-# package.json ve package-lock.json'ı kopyala
 COPY package*.json ./
-
-# Gerekli bağımlılıkları yükle
 RUN npm install
-
-# Kaynak dosyalarını kopyala
 COPY . .
+RUN npm run build
 
-# Uygulamayı çalıştır
-CMD ["npm", "start"] 
+# --- Production Aşaması ---
+FROM nginx:alpine
+
+# Nginx config (opsiyonel özelleştirme yapılabilir)
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Build edilen statik dosyaları Nginx dizinine kopyala
+COPY --from=builder /app/build /usr/share/nginx/html
+
+# Nginx default olarak 80 portunu dinler
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

@@ -13,6 +13,7 @@ import "./Deid.css";
 import ExampleDemo from "../components/ExampleDemo";
 import LiveDemo from "../components/LiveDemo";
 import clsModelDetails from "../data/clsModelDetails";
+import { v4 as uuidv4 } from "uuid"; // üstte
 
 const Classification = () => {
   const [inputText, setInputText] = useState("");
@@ -41,8 +42,16 @@ const Classification = () => {
   }, []);
 
   const handleSubmit = async () => {
+    // user_id üret veya al
+    let userId = localStorage.getItem("user_id");
+    if (!userId) {
+      userId = uuidv4();
+      localStorage.setItem("user_id", userId);
+    }
     try {
-      const res = await axios.post("http://localhost:8001/predict", {
+      const res = await axios.post("http://localhost:8000/predict", {
+        user_id: userId,
+        model: "classification",
         text: [inputText],
       });
       const predictionOutput = res.data.output;

@@ -32,7 +32,7 @@ async def startup_event():
 class PredictionRequest(BaseModel):
     user_id: int
     text: List[str]
-    model_name: str  # Hangi modelin kullanılacağını belirtiyoruz
+    model: str  # Hangi modelin kullanılacağını belirtiyoruz
 
 class PredictionResponse(BaseModel):
     data: Dict
@@ -45,7 +45,7 @@ async def predict(request: PredictionRequest, http_client: httpx.AsyncClient = D
     if daily_prediction_count >= DAILY_PREDICTION_LIMIT:
         raise HTTPException(status_code=429, detail="Daily prediction limit reached.")
 
-    model_name = request.model_name
+    model_name = request.model
     model_endpoint = model_endpoints.get(model_name)  # Model endpoint'ini al
 
     if not model_endpoint:

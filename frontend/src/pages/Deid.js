@@ -13,6 +13,8 @@ import "./Deid.css";
 import ExampleDemo from "../components/ExampleDemo";
 import LiveDemo from "../components/LiveDemo";
 import deidModelDetails from "../data/deidModelDetails";
+import { v4 as uuidv4 } from "uuid"; // üstte
+
 const Deid = () => {
   const [inputText, setInputText] = useState("");
   const [result, setResult] = useState(null);
@@ -40,8 +42,16 @@ const Deid = () => {
   }, []);
 
   const handleSubmit = async () => {
+    // user_id üret veya al
+    let userId = localStorage.getItem("user_id");
+    if (!userId) {
+      userId = uuidv4();
+      localStorage.setItem("user_id", userId);
+    }
     try {
       const res = await axios.post("http://localhost:8000/predict", {
+        user_id: userId,
+        model: "deid",
         text: [inputText],
         masked: true,
         faked: true,

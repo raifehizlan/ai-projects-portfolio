@@ -13,6 +13,7 @@ import "./Deid.css";
 import ExampleDemo from "../components/ExampleDemo";
 import LiveDemo from "../components/LiveDemo";
 import nerModelDetails from "../data/nerModelDetails";
+import { v4 as uuidv4 } from "uuid"; // üstte
 
 const Ner = () => {
   const [inputText, setInputText] = useState("");
@@ -41,8 +42,16 @@ const Ner = () => {
   }, []);
 
   const handleSubmit = async () => {
+    // user_id üret veya al
+    let userId = localStorage.getItem("user_id");
+    if (!userId) {
+      userId = uuidv4();
+      localStorage.setItem("user_id", userId);
+    }
     try {
-      const res = await axios.post("http://localhost:8080/predict", {
+      const res = await axios.post("http://localhost:8000/predict", {
+        user_id: userId,
+        model: "ner",
         text: [inputText],
       });
       const predictionOutput = res.data.output[0];
