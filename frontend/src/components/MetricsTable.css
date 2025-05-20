@@ -16,4 +16,6 @@
     background-color: #f1f3f6;
     color: var(--text-color);
   }
-  
+  .metrics h2{
+    text-align: center;
+  }

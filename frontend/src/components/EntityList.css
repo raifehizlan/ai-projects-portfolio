@@ -30,3 +30,7 @@
   .entity-list li:hover {
     background-color: #dbeeff;
   }
+
+  .entities h2{
+    text-align: center;
+  }

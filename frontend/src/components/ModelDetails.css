@@ -1,6 +1,4 @@
-
-  
-  section {
+section {
     background-color: white;
     border-radius: 12px;
     padding: 2rem;
@@ -8,16 +6,11 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   }
   
-  .intro p{
+  .modelDetails p{
     text-align: justify;
   }
 
-  .introh1 {
-    font-size: 1.4rem;
-    color: var(--primary-color);
-    text-align: center;
-    padding-top: 0rem;
-    margin-top:0rem !important;
-    margin-bottom:30px;
+  .modelDetails .modeldetailsh1 {
 
+    text-align: center !important; 
   }

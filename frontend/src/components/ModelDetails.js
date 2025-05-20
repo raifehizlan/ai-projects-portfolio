@@ -2,8 +2,8 @@ import React from "react";
 import "./ModelDetails.css";
 
 const ModelDetails = ({ title, description, methods, users }) => (
-  <section className="intro">
-    <h1 className="introh1">{title}</h1>
+  <section className="modelDetails">
+    <h2 className="modeldetailsh1">{title}</h2>
     <p>{description}</p>
     <p>{methods}</p>
     <p>

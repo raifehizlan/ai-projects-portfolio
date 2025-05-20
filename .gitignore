@@ -54,22 +54,5 @@ backend/*.pyc
 backend/.env
 backend/venv/
 backend/*.log
+backend/lesen_table.py
 
-
-
-
-# IDE'ye özel dosyalar
-.idea/
-.vscode/
-*.iml
-*.swp
-*.swo
-
-# İşletim sistemine özel dosyalar
-.DS_Store
-Thumbs.db
-
-# Diğer geçici dosyalar veya loglar
-*.log
-temp/
-tmp/

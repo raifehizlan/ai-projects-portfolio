@@ -1,0 +1,8 @@
+fastapi==0.95.0
+uvicorn==0.22.0
+httpx==0.24.1
+sqlalchemy==2.0.15
+pydantic==1.11.1
+azure-storage-blob==12.10.0
+azure-data-tables==12.10.0
+decouple==5.0

@@ -5,6 +5,10 @@
   margin-top: 150px;
   z-index: 2;
 }
+
+.liveDemoSection h2{
+  text-align: center;
+}
 .examplesDemoButton{
     display: flex;
     flex-direction: column;
