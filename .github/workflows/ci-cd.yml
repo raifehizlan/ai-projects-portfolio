@@ -17,6 +17,8 @@ env:
   AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
   AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
   AZURE_SVG_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_SVG_STORAGE_CONNECTION_STRING }}
+  AZURE_CONTAINERAPPS_ENVIRONMENT: ${{ secrets.AZURE_CONTAINERAPPS_ENVIRONMENT }}
+  AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
   LOCAL_FOLDER: ${{ secrets.LOCAL_FOLDER }}
   REGISTRY: myportfolioacrraife.azurecr.io
   IMAGE_OWNER: myportfolioacrraife
@@ -95,6 +97,21 @@ jobs:
         run: |
           docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:latest .
           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:latest
+
+      - name: Azure Login
+        if: steps.check.outputs.changed == 'true'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Update Azure Container App with new backend image
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          az containerapp update \
+            --name backend-app \
+            --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
+            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:latest \
+            --environment ${{ env.AZURE_CONTAINERAPPS_ENVIRONMENT }}
 
   build-deid:
     runs-on: ubuntu-latest
