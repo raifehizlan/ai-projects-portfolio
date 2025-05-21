@@ -57,7 +57,6 @@ class HealthResponse(BaseModel):
     name: str = Field(..., description="Model name.")
     status: str = Field(default="OK", description="Health status of the model.")
 
-# ----- Ana Model Sınıfı -----
 
 class KFServeHealthDeidNerModel:
     def __init__(self):
