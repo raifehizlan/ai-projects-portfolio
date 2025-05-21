@@ -12,4 +12,5 @@ nltk==3.7
 ipython
 seqeval
 xformers
+aimped
 
