@@ -10,9 +10,10 @@ from azure.storage.blob import BlobServiceClient
 import httpx  # HTTP istekleri için
 from azure_table_storage import update_prediction_count, get_daily_prediction_count  # Azure Table Storage fonksiyonlarını ekledim
 from blob_uploader import upload_json_to_azure
+from decouple import config
 
-AZURE_STORAGE_CONNECTION_STRING = os.environ.get("AZURE_STORAGE_CONNECTION_STRING")
-AZURE_BLOB_CONTAINER_NAME=os.environ.get("AZURE_BLOB_CONTAINER_NAME")
+AZURE_STORAGE_CONNECTION_STRING = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
+AZURE_BLOB_CONTAINER_NAME=os.getenv("AZURE_BLOB_CONTAINER_NAME")
 DAILY_PREDICTION_LIMIT=10
 
 app = FastAPI()
@@ -20,7 +21,7 @@ app = FastAPI()
 model_endpoints = {
     "deid": "https://model-deid:8000/predict",
     "ner": "http://ner-service:8000/predict",
-    "assertion": "http://as-service:8000/predict",
+    "assertion": "http://ass:8002/predict",
     "relation": "http://rel-service:8000/predict",
     "classification": "http://classify-service:8000/predict"
 }
@@ -44,10 +45,13 @@ async def predict(request: PredictionRequest, http_client: httpx.AsyncClient = D
 
     if daily_prediction_count >= DAILY_PREDICTION_LIMIT:
         raise HTTPException(status_code=429, detail="Daily prediction limit reached.")
-
+    print(user_id)
+    print(daily_prediction_count)
     model_name = request.model
+    print(model_name)
     model_endpoint = model_endpoints.get(model_name)  # Model endpoint'ini al
-
+    print(model_endpoint)
+    print(request.text)
     if not model_endpoint:
         raise HTTPException(status_code=400, detail=f"Model '{model_name}' bulunamadı.")
 
@@ -56,8 +60,12 @@ async def predict(request: PredictionRequest, http_client: httpx.AsyncClient = D
         response = await http_client.post(
             model_endpoint,
             json={"text": request.text},  # Gönderilecek veri
-            timeout=30.0  # saniye
+            timeout=60.0  # saniye
         )
+
+        print(f"Status code: {response.status_code}")
+        print(f"Response text: {response.text}")
+
         response.raise_for_status()  # Hata durumunda hata yükselt
         prediction_result = response.json()
         print(prediction_result)

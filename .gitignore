@@ -43,6 +43,7 @@ ml_models/model_icd10/app/__pycache__
 
 
 # Backend için (Python örneği)
+backend/.env
 backend/__pycache__/
 backend/*.pyc
 backend/venv/
