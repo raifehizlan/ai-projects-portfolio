@@ -77,7 +77,7 @@ jobs:
           az containerapp update \
             --name frontend-app \
             --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
-            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/frontend:latest 
+            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/frontend:latest \
             --set-env-vars "${{ env.COMMON_ENV_VARS }}"
 
   build-backend:
@@ -127,7 +127,7 @@ jobs:
           az containerapp update \
             --name backend \
             --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
-            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:latest 
+            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:latest \
             --set-env-vars "${{ env.COMMON_ENV_VARS }}"
 
   build-deid:
@@ -178,7 +178,7 @@ jobs:
           az containerapp update \
             --name model-deid \
             --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
-            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-deid:latest 
+            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-deid:latest \
             --set-env-vars "${{ env.COMMON_ENV_VARS }}"
 
   build-ner:
