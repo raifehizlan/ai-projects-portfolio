@@ -62,8 +62,8 @@ jobs:
       - name: Build and push frontend image
         if: steps.check.outputs.changed == 'true'
         run: |
-          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/frontend:latest .
-          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/frontend:latest
+          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/frontend:${{ github.sha }} .
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/frontend:${{ github.sha }}
 
 
       - name: Azure Login
@@ -78,7 +78,7 @@ jobs:
           az containerapp update \
             --name frontend-app \
             --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
-            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/frontend:latest 
+            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/frontend:${{ github.sha }}
 
 
   build-backend:
@@ -113,8 +113,8 @@ jobs:
       - name: Build and push backend image
         if: steps.check.outputs.changed == 'true'
         run: |
-          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:latest .
-          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:latest
+          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:${{ github.sha }} .
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:${{ github.sha }}
 
       - name: Azure Login
         if: steps.check.outputs.changed == 'true'
@@ -128,7 +128,7 @@ jobs:
           az containerapp update \
             --name backend \
             --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
-            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:latest 
+            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:${{ github.sha }} 
 
 
   build-deid:
@@ -163,8 +163,8 @@ jobs:
       - name: Build and push deid image
         if: steps.check.outputs.changed == 'true'
         run: |
-          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-deid:latest .
-          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-deid:latest
+          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-deid:${{ github.sha }} .
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-deid:${{ github.sha }}
 
 
       - name: Azure Login
@@ -179,7 +179,7 @@ jobs:
           az containerapp update \
             --name model-deid \
             --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
-            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-deid:latest 
+            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-deid:${{ github.sha }}
 
 
   build-ner:
@@ -214,8 +214,8 @@ jobs:
       - name: Build and push ner image
         if: steps.check.outputs.changed == 'true'
         run: |
-          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-ner:latest .
-          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-ner:latest
+          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-ner:${{ github.sha }} .
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-ner:${{ github.sha }}
 
   build-assertion:
     runs-on: ubuntu-latest
@@ -249,8 +249,8 @@ jobs:
       - name: Build and push assertion image
         if: steps.check.outputs.changed == 'true'
         run: |
-          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-assertion:latest .
-          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-assertion:latest
+          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-assertion:${{ github.sha }} .
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-assertion:${{ github.sha }}
 
   build-relation:
     runs-on: ubuntu-latest
@@ -284,8 +284,8 @@ jobs:
       - name: Build and push relation image
         if: steps.check.outputs.changed == 'true'
         run: |
-          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-relation:latest .
-          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-relation:latest
+          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-relation:${{ github.sha }} .
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-relation:${{ github.sha }}
 
   build-classification:
     runs-on: ubuntu-latest
@@ -319,5 +319,5 @@ jobs:
       - name: Build and push classification image
         if: steps.check.outputs.changed == 'true'
         run: |
-          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-classification:latest .
-          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-classification:latest
+          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-classification:${{ github.sha }} .
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-classification:${{ github.sha }}
