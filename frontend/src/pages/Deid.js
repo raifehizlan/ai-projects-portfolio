@@ -65,7 +65,14 @@ const Deid = () => {
         }
       );
       console.log(res.data);
+    if (res.data?.output?.length > 0) {
       const predictionOutput = res.data.output[0];
+      setResult(predictionOutput);
+      setParsedResult(parseMaskedText(inputText, predictionOutput.entities));
+    } else {
+      alert("Modelden beklenen çıktı alınamadı.");
+      console.warn("output boş ya da undefined:", res.data.output);
+    }
       console.log(predictionOutput);
       setResult(predictionOutput);
       console.log(predictionOutput.entities);
