@@ -1,4 +1,4 @@
-from azure.data.tables import TableServiceClient, TableEntity
+from azure.data.tables import TableServiceClient, TableEntity, UpdateMode
 from datetime import datetime, timezone, timedelta
 import os
 from decouple import config
@@ -20,7 +20,7 @@ def update_prediction_count(user_id: int | str):
     try:
         entity = table_client.get_entity(partition_key=partition_key, row_key=row_key)
         entity["prediction_count"] = int(entity.get("prediction_count", 0)) + 1
-        table_client.update_entity(entity=entity, mode="Merge")
+        table_client.update_entity(entity=entity, mode=UpdateMode.MERGE)
     except Exception:
         # Eğer entity yoksa veya erişilemezse, oluşturmak için upsert_entity kullan
         entity = {
@@ -29,7 +29,7 @@ def update_prediction_count(user_id: int | str):
             "prediction_count": 1,
             "expiresAt": (datetime.now(timezone.utc) + timedelta(days=1)).isoformat()
         }
-        table_client.upsert_entity(entity=entity, mode="Merge")  # ✅ upsert kullanılıyor
+        table_client.upsert_entity(entity=entity,  mode=UpdateMode.MERGE)  # ✅ upsert kullanılıyor
 
 # Günlük tahmin limitini sorgulamak için
 def get_daily_prediction_count(user_id: int | str) -> int:
