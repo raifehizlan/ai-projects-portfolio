@@ -42,5 +42,5 @@
     # ----------------------
     # 4. Uygulama başlatma komutu
     # ----------------------
-    CMD ["python", "main.py"]
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8000", "main:app"]
     
