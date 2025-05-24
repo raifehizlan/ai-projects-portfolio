@@ -74,9 +74,8 @@ const Deid = () => {
       console.warn("output boş ya da undefined:", res.data.output);
     }
       console.log(predictionOutput);
-      setResult(predictionOutput);
       console.log(predictionOutput.entities);
-      setParsedResult(parseMaskedText(inputText, predictionOutput.entities));
+
     } catch (error) {
       console.error(error);
       alert("Backend'e erişilemedi.");

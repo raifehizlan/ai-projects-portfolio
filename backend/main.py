@@ -90,4 +90,4 @@ async def predict(request: PredictionRequest, http_client: httpx.AsyncClient = D
     update_prediction_count(user_id)  # Kullanıcı tahmin sayısını artır
 
 
-    return PredictionResponse(data=prediction_result)
+    return PredictionResponse(data=prediction_result.data)
