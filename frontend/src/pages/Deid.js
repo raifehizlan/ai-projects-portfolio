@@ -110,6 +110,7 @@ const Deid = () => {
         result={result}
         showJson={showJson}
         toggleJson={() => setShowJson(!showJson)}
+        modelType="ner"
       />
     </div>
   );
