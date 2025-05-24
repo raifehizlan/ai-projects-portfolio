@@ -129,10 +129,7 @@ jobs:
             --name backend \
             --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
             --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:latest \
-            --env-vars \
-              AZURE_STORAGE_CONNECTION_STRING2="${{ env.AZURE_STORAGE_CONNECTION_STRING2 }}" \
-              AZURE_BLOB_CONTAINER_NAME="${{ env.AZURE_BLOB_CONTAINER_NAME }}" \
-              AZURE_STORAGE_CONTAINER="${{ env.AZURE_STORAGE_CONTAINER }}"
+
 
   build-deid:
     runs-on: ubuntu-latest
@@ -183,10 +180,7 @@ jobs:
             --name model-deid \
             --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
             --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-deid:latest \
-            --env-vars \
-              AZURE_STORAGE_CONNECTION_STRING="${{ env.AZURE_STORAGE_CONNECTION_STRING }}" \
-              AZURE_BLOB_CONTAINER_NAME="${{ env.AZURE_BLOB_CONTAINER_NAME }}" \
-              AZURE_STORAGE_CONTAINER="${{ env.AZURE_STORAGE_CONTAINER }}"
+
 
   build-ner:
     runs-on: ubuntu-latest
