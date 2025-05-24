@@ -50,14 +50,14 @@ const Ner = () => {
     }
     try {
       const res = await axios.post(
-        "https://backend.internal.redwater-2caf4374.switzerlandnorth.azurecontainerapps.io:8000/predict",
+        "https://backend.redwater-2caf4374.switzerlandnorth.azurecontainerapps.io:8000/predict/",
         {
           user_id: userId,
           model: "ner",
           text: [inputText],
         }
       );
-      const predictionOutput = res.data.output[0];
+      const predictionOutput = res.data.data.output[0];
       setResult(predictionOutput);
       setParsedResult(parseMaskedText(inputText, predictionOutput));
     } catch (error) {
@@ -98,6 +98,7 @@ const Ner = () => {
         result={result}
         showJson={showJson}
         toggleJson={() => setShowJson(!showJson)}
+        modelType="ner"
       />
     </div>
   );

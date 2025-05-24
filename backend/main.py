@@ -28,7 +28,7 @@ app.add_middleware(
 
 model_endpoints = {
     "deid": "https://model-deid.redwater-2caf4374.switzerlandnorth.azurecontainerapps.io/predict",
-    "ner": "http://ner-service:8000/predict",
+    "ner": "https://model-ner.redwater-2caf4374.switzerlandnorth.azurecontainerapps.io/predict",
     "assertion": "http://ass:8002/predict",
     "relation": "http://rel-service:8000/predict",
     "classification": "http://classify-service:8000/predict"

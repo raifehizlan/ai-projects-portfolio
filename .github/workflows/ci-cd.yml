@@ -217,6 +217,20 @@ jobs:
           docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-ner:${{ github.sha }} .
           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-ner:${{ github.sha }}
 
+      - name: Azure Login
+        if: steps.check.outputs.changed == 'true'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Update Azure Container App with new model-ner image
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          az containerapp update \
+            --name model-ner \
+            --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
+            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-ner:${{ github.sha }}
+
   build-assertion:
     runs-on: ubuntu-latest
     defaults:
