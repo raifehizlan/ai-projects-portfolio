@@ -11,12 +11,20 @@ import httpx  # HTTP istekleri için
 from azure_table_storage import update_prediction_count, get_daily_prediction_count  # Azure Table Storage fonksiyonlarını ekledim
 from blob_uploader import upload_json_to_azure
 from decouple import config
+from fastapi.middleware.cors import CORSMiddleware
+
 
 AZURE_STORAGE_CONNECTION_STRING = os.getenv("AZURE_STORAGE_CONNECTION_STRING2")
 AZURE_BLOB_CONTAINER_NAME=os.getenv("AZURE_BLOB_CONTAINER_NAME")
 DAILY_PREDICTION_LIMIT=10
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # veya frontend domaini
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 model_endpoints = {
     "deid": "https://model-deid.redwater-2caf4374.switzerlandnorth.azurecontainerapps.io/predict",

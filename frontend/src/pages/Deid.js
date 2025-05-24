@@ -50,7 +50,7 @@ const Deid = () => {
     }
     try {
       const res = await axios.post(
-        "https://backend.internal.redwater-2caf4374.switzerlandnorth.azurecontainerapps.io/predict",
+        "https://backend.internal.redwater-2caf4374.switzerlandnorth.azurecontainerapps.io/predict/",
         {
           user_id: userId,
           model: "deid",
