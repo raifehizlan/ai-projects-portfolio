@@ -14,3 +14,4 @@ seqeval
 flasgger[all]
 sentencepiece
 protobuf==3.20.3
+gunicorn
