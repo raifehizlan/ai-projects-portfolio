@@ -78,7 +78,7 @@ jobs:
             --name frontend-app \
             --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
             --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/frontend:latest \
-            --set-env-vars \
+            --env-vars \
               AZURE_STORAGE_CONNECTION_STRING="${{ env.AZURE_STORAGE_CONNECTION_STRING }}" \
               AZURE_BLOB_CONTAINER_NAME="${{ env.AZURE_BLOB_CONTAINER_NAME }}" \
               AZURE_STORAGE_CONTAINER="${{ env.AZURE_STORAGE_CONTAINER }}"
@@ -131,7 +131,7 @@ jobs:
             --name backend \
             --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
             --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:latest \
-            --set-env-vars \
+            --env-vars \
               AZURE_STORAGE_CONNECTION_STRING="${{ env.AZURE_STORAGE_CONNECTION_STRING }}" \
               AZURE_BLOB_CONTAINER_NAME="${{ env.AZURE_BLOB_CONTAINER_NAME }}" \
               AZURE_STORAGE_CONTAINER="${{ env.AZURE_STORAGE_CONTAINER }}"
@@ -185,7 +185,7 @@ jobs:
             --name model-deid \
             --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
             --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-deid:latest \
-            --set-env-vars \
+            --env-vars \
               AZURE_STORAGE_CONNECTION_STRING="${{ env.AZURE_STORAGE_CONNECTION_STRING }}" \
               AZURE_BLOB_CONTAINER_NAME="${{ env.AZURE_BLOB_CONTAINER_NAME }}" \
               AZURE_STORAGE_CONTAINER="${{ env.AZURE_STORAGE_CONTAINER }}"
