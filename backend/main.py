@@ -39,7 +39,7 @@ async def startup_event():
     pass  # Azure Table Storage için tabloların oluşturulmasını burada gerçekleştirebilirsiniz
 
 class PredictionRequest(BaseModel):
-    user_id: int
+    user_id: str
     text: List[str]
     model: str  # Hangi modelin kullanılacağını belirtiyoruz
 
