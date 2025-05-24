@@ -12,7 +12,7 @@ from azure_table_storage import update_prediction_count, get_daily_prediction_co
 from blob_uploader import upload_json_to_azure
 from decouple import config
 
-AZURE_STORAGE_CONNECTION_STRING = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
+AZURE_STORAGE_CONNECTION_STRING = os.getenv("AZURE_STORAGE_CONNECTION_STRING2")
 AZURE_BLOB_CONTAINER_NAME=os.getenv("AZURE_BLOB_CONTAINER_NAME")
 DAILY_PREDICTION_LIMIT=10
 
