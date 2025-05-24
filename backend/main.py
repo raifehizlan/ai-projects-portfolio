@@ -21,10 +21,10 @@ DAILY_PREDICTION_LIMIT=10
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # veya frontend domaini
+    allow_origins=["https://frontend-app.redwater-2caf4374.switzerlandnorth.azurecontainerapps.io"],
     allow_methods=["*"],
     allow_headers=["*"],
-)
+    allow_credentials=True,
 
 model_endpoints = {
     "deid": "https://model-deid.redwater-2caf4374.switzerlandnorth.azurecontainerapps.io/predict",
