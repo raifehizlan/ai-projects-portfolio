@@ -19,17 +19,17 @@ def update_prediction_count(user_id: int | str):
 
     try:
         entity = table_client.get_entity(partition_key=partition_key, row_key=row_key)
-        entity["prediction_count"] += 1
-        table_client.update_entity(entity=entity, mode="Merge")  # 'Merge' daha güvenlidir
-    except Exception as e:
-        # Eğer entity yoksa, yeni bir tane oluştur
+        entity["prediction_count"] = int(entity.get("prediction_count", 0)) + 1
+        table_client.update_entity(entity=entity, mode="Merge")
+    except Exception:
+        # Eğer entity yoksa veya erişilemezse, oluşturmak için upsert_entity kullan
         entity = {
             "PartitionKey": partition_key,
             "RowKey": row_key,
             "prediction_count": 1,
             "expiresAt": (datetime.now(timezone.utc) + timedelta(days=1)).isoformat()
         }
-        table_client.create_entity(entity=entity)
+        table_client.upsert_entity(entity=entity, mode="Merge")  # ✅ upsert kullanılıyor
 
 # Günlük tahmin limitini sorgulamak için
 def get_daily_prediction_count(user_id: int | str) -> int:
