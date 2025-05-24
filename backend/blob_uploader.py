@@ -10,13 +10,13 @@ AZURE_STORAGE_CONNECTION_STRING=os.getenv("AZURE_STORAGE_CONNECTION_STRING")
 AZURE_BLOB_CONTAINER_NAME=os.getenv("AZURE_BLOB_CONTAINER_NAME")
 print(AZURE_BLOB_CONTAINER_NAME)
 
-def upload_json_to_azure(json_data: dict, user_id: int, model_name: str) -> str:
+def upload_json_to_azure(json_data: dict, user_id: str, model_name: str) -> str:
     """
     Bir JSON nesnesini Azure Blob Storage'a hiyerarşik bir klasör yapısıyla yükler.
 
     Args:
         json_data (dict): Yüklenecek JSON verisi.
-        user_id (int): Kullanıcı ID'si.
+        user_id (str): Kullanıcı ID'si.
         model_name (str): Modelin adı (klasör adı olarak kullanılacak).
 
     Returns:
