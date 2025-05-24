@@ -78,7 +78,7 @@ jobs:
           az containerapp update \
             --name frontend-app \
             --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
-            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/frontend:latest \
+            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/frontend:latest 
 
 
   build-backend:
@@ -128,7 +128,7 @@ jobs:
           az containerapp update \
             --name backend \
             --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
-            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:latest \
+            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/backend:latest 
 
 
   build-deid:
@@ -179,7 +179,7 @@ jobs:
           az containerapp update \
             --name model-deid \
             --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
-            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-deid:latest \
+            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-deid:latest 
 
 
   build-ner:
