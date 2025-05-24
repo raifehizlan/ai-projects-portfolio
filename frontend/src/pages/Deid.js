@@ -65,7 +65,9 @@ const Deid = () => {
         }
       );
       const predictionOutput = res.data.output[0];
+      console.log(predictionOutput);
       setResult(predictionOutput);
+      console.log(predictionOutput.entities);
       setParsedResult(parseMaskedText(inputText, predictionOutput.entities));
     } catch (error) {
       console.error(error);
