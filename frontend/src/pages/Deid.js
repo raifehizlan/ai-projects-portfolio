@@ -47,9 +47,14 @@ const Deid = () => {
     if (!userId) {
       userId = uuidv4();
       localStorage.setItem("user_id", userId);
-      console.log(userId);
     }
     console.log(inputText);
+    console.log(userId);
+    console.log({
+      user_id: userId,
+      model: "deid",
+      text: [inputText],
+    });
     try {
       const res = await axios.post(
         "https://backend.redwater-2caf4374.switzerlandnorth.azurecontainerapps.io/predict/",
