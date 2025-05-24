@@ -20,7 +20,6 @@ const ExampleDemo = ({
   const handleCopy = () => {
     navigator.clipboard.writeText(inputText);
   };
-  console.log("parsedResult", parsedResult);
   const renderPredictionResult = () => {
     switch (modelType) {
       case "ner":
