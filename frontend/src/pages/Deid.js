@@ -55,8 +55,6 @@ const Deid = () => {
           user_id: userId,
           model: "deid",
           text: [inputText],
-          masked: true,
-          faked: true,
         }
       );
       const predictionOutput = res.data.output[0];
