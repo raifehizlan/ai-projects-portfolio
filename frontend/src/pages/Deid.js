@@ -64,6 +64,7 @@ const Deid = () => {
           text: [inputText],
         }
       );
+      console.log(res.data);
       const predictionOutput = res.data.output[0];
       console.log(predictionOutput);
       setResult(predictionOutput);
