@@ -64,15 +64,11 @@ const Deid = () => {
           text: [inputText],
         }
       );
-      console.log(res.data);
-    if (res.data?.data?.output?.length > 0) {
+      console.log(res.data.data.output[0]);
       const predictionOutput = res.data.data.output[0];
       setResult(predictionOutput);
       setParsedResult(parseMaskedText(inputText, predictionOutput.entities));
-    } else {
-      alert("Modelden beklenen çıktı alınamadı.");
-      console.warn("output boş ya da undefined:", res.data.output);
-    }
+
       console.log(predictionOutput);
       console.log(predictionOutput.entities);
 
