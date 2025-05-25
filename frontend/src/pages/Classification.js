@@ -48,16 +48,22 @@ const Classification = () => {
       userId = uuidv4();
       localStorage.setItem("user_id", userId);
     }
+    console.log({
+      user_id: userId,
+      model: "classification",
+      text: [inputText],
+    });
     try {
       const res = await axios.post(
-        "https://backend.internal.redwater-2caf4374.switzerlandnorth.azurecontainerapps.io:8000/predict",
+        "https://backend.redwater-2caf4374.switzerlandnorth.azurecontainerapps.io/predict/",
         {
           user_id: userId,
           model: "classification",
           text: [inputText],
         }
       );
-      const predictionOutput = res.data.output;
+      const predictionOutput = res.data.data.output;
+      console.log(predictionOutput);
       setResult(predictionOutput);
       setParsedResult({ text: inputText, output: predictionOutput });
     } catch (error) {
