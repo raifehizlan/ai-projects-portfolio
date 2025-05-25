@@ -60,7 +60,7 @@ const Assertion = () => {
     });
     try {
       const res = await axios.post(
-        "https://backend.redwater-2caf4374.switzerlandnorth.azurecontainerapps.io/predict",
+        "https://backend.redwater-2caf4374.switzerlandnorth.azurecontainerapps.io/predict/",
         {
           user_id: userId,
           model: "relation",
@@ -68,7 +68,7 @@ const Assertion = () => {
         }
       );
       const predictionOutput = res.data.data.output[0];
-      const url = res.data.data_svg;
+      const url = res.data.data.data_svg;
       console.log(predictionOutput);
       setResult(predictionOutput);
       setParsedResult(predictionOutput);
