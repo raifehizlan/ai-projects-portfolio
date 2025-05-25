@@ -31,7 +31,7 @@ model_endpoints = {
     "ner": "https://model-ner.redwater-2caf4374.switzerlandnorth.azurecontainerapps.io/predict",
     "assertion": "http://ass:8002/predict",
     "relation": "http://rel-service:8000/predict",
-    "classification": "http://classify-service:8000/predict"
+    "classification": "https://model-classification.redwater-2caf4374.switzerlandnorth.azurecontainerapps.io/predict"
 }
 
 @app.on_event("startup")
