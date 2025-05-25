@@ -50,7 +50,7 @@ const Assertion = () => {
     }
     try {
       const res = await axios.post(
-        "https://backend.redwater-2caf4374.switzerlandnorth.azurecontainerapps.io/predict",
+        "https://backend.redwater-2caf4374.switzerlandnorth.azurecontainerapps.io/predict/",
         {
           user_id: userId,
           model: "assertion",
