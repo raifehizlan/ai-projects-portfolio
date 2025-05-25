@@ -30,7 +30,7 @@ model_endpoints = {
     "deid": "https://model-deid.redwater-2caf4374.switzerlandnorth.azurecontainerapps.io/predict",
     "ner": "https://model-ner.redwater-2caf4374.switzerlandnorth.azurecontainerapps.io/predict",
     "assertion": "http://ass:8002/predict",
-    "relation": "http://rel-service:8000/predict",
+    "relation": "https://model-relation.redwater-2caf4374.switzerlandnorth.azurecontainerapps.io/predict",
     "classification": "https://model-classification.redwater-2caf4374.switzerlandnorth.azurecontainerapps.io/predict"
 }
 
