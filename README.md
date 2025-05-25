@@ -61,15 +61,6 @@ The platform is fully automated with **GitHub Actions**:
 
 ---
 
-## ⚙️ How to Run Locally
-
-> Requirements: Docker, Python 3.9+, Node.js (for frontend)
-
-### 1. Clone the repo:
-```bash
-git clone https://github.com/raifehizlan/projects-portfolio.git
-cd projects-portfolio
-```
 
 
 ## ☁️ Deployment
