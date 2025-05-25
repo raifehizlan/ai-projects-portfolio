@@ -335,3 +335,17 @@ jobs:
         run: |
           docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-classification:${{ github.sha }} .
           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-classification:${{ github.sha }}
+
+      - name: Azure Login
+        if: steps.check.outputs.changed == 'true'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Update Azure Container App with new model-cls image
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          az containerapp update \
+            --name model-classification \
+            --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
+            --image ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/model-classification:${{ github.sha }}
