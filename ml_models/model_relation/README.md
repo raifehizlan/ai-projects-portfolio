@@ -1,1 +1,1 @@
-test relation
+test relation .
